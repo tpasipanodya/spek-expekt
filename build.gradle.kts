@@ -25,11 +25,11 @@ configurations {
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("io.github.microutils:kotlin-logging:1.7.9")
-	implementation("com.natpryce:hamkrest:1.7.0.3")
-	implementation("com.google.guava:guava:29.0-jre")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0")
-	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.0")
+	implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
+	implementation("com.natpryce:hamkrest:1.8.0.1")
+	implementation("com.google.guava:guava:30.1.1-jre")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.0")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.0")
 	implementation("org.junit.jupiter:junit-jupiter")
 	implementation(enforcedPlatform("org.junit:junit-bom:5.7.1"))
 	implementation("org.spekframework.spek2:spek-dsl-jvm:2.0.15")
@@ -46,5 +46,5 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> { useJUnitPlatform() }
 
 tasks.withType<ShadowJar> {
-//	archiveFileName.set("${rootProject.name}.jar")
+	archiveFileName.set("${rootProject.name}.${rootProject.version}.jar")
 }
