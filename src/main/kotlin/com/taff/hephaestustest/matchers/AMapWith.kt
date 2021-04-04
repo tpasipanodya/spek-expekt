@@ -7,6 +7,8 @@ import java.lang.IllegalArgumentException
 
 /**
  * A matcher that checks whether the expected set of entries are a subset of the actual map.
+ *
+ * values are compared using [com.taff.hephaestustest.Config.comparers]
  */
 inline fun <K> aMapWith(vararg expectedEntries: Pair<K, *>) = object : Matcher<Map<K, *>> {
 
@@ -41,6 +43,8 @@ inline fun <K> aMapWith(vararg expectedEntries: Pair<K, *>) = object : Matcher<M
 
     /**
      * helper function for determining whether 2 values that could be different types (including matchers) match.
+     *
+     *  values are compared using [com.taff.hephaestustest.Config.comparers]
      */
     private fun actualValueMatchesExpected(actual: Any, expected: Any?) = expected?.let { safeExpected ->
         try {

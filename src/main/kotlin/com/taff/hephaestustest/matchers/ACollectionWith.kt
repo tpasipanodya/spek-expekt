@@ -6,7 +6,7 @@ import com.taff.hephaestustest.Config
 
 /**
  * Compares 2 collections, ignoring ordering. elements are compared using fuzzy matching logic defined in
- * com.taff.hephaestustest.Config.compaprers and recursively for nested matchers.
+ * [com.taff.hephaestustest.Config.compaprers] and recursively for nested matchers.
  */
 inline fun <T> anUnorderedCollectionWith(vararg expecteds: T) = object : Matcher<Collection<T>> {
 
@@ -38,7 +38,7 @@ inline fun <T> anUnorderedCollectionWith(vararg expecteds: T) = object : Matcher
 
 /**
  * Compares 2 collections with strict ordering. elements are compared using fuzzy matching logic defined in
- * com.taff.hephaestustest.Config.comparers and recursively for nested matchers.
+ * [com.taff.hephaestustest.Config.comparers] and recursively for nested matchers.
  */
 inline fun <T> anOrderedCollectionWith(vararg expecteds: T) = object : Matcher<Collection<T>> {
 

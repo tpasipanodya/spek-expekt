@@ -16,49 +16,42 @@ import com.taff.hephaestustest.matchers.anUnorderedCollectionWith
  * expect(myTestResult) {
  *   toSatisfy { count == 1 }
  * }
+ *
+ * @param A the actual value's type.
  */
-class Expectation<T> {
+class Expectation<A> {
 
-    private val matchers = mutableListOf<Matcher<T>>()
-
-    /**
-     * Checks whether the actual map is a superset of the expected map. Keys should pass a hashcode and equality test
-     * whilst corresponding values are compared using the fuzzy matching logic configured on com.taff.hephaestustest.Config.comparers.
-     *
-     * Collections are compared using the matcher com.taff.hephaestustest.matchers.anOrderedCollectionWith.
-     */
-    fun <K> toBeAMapWith(vararg entries: Pair<K, *>) = matchers.add(aMapWith(*entries) as Matcher<T>)
+    private val matchers = mutableListOf<Matcher<A>>()
 
     /**
      * Checks whether the actual map is a superset of the expected map. Keys should pass a hashcode and equality test
      * whilst corresponding values are compared using the fuzzy matching logic configured on com.taff.hephaestustest.Config.comparers.
      *
-     * Collections are compared using the matcher com.taff.hephaestustest.matchers.anOrderedCollectionWith.
+     * Collections are compared using the matcher [com.taff.hephaestustest.matchers.anOrderedCollectionWith].
+     *
      */
-    fun <K> toBeAMapWith(expected: Map<K, *>) = matchers
-        .add(aMapWith(*expected
-            .entries
-            .map { it.toPair() }
-            .toTypedArray()) as Matcher<T>)
+    fun <E> toBeAMapWith(vararg entries: Pair<E, *>) = matchers.add(aMapWith(*entries) as Matcher<A>)
 
     /**
      * Checks whether the actual collection is a superset of the expected collection.
-     * elements are compared using the fuzzy matching logic configured on com.taff.hephaestustest.Config.comparers.
+     * elements are compared using the fuzzy matching logic configured in [com.taff.hephaestustest.Config.comparers].
      *
-     * Collections are compared using the matcher com.taff.hephaestustest.matchers.anOrderedCollectionWith.
+     * Collections are compared using the matcher [com.taff.hephaestustest.matchers.anOrderedCollectionWith].
+     *
+     * @param K THe type
      */
     fun <K> toBeAnOrderedCollectionWith(vararg expecteds: K) {
-        matchers.add(anOrderedCollectionWith(expecteds) as Matcher<T>)
+        matchers.add(anOrderedCollectionWith(expecteds) as Matcher<A>)
     }
 
     /**
      * Checks whether the actual collection is a superset of the expected collection.
      * elements are compared using the fuzzy matching logic configured on com.taff.hephaestustest.Config.comparers.
      *
-     * Collections are compared using the matcher com.taff.hephaestustest.matchers.anOrderedCollectionWith.
+     * Collections are compared using the matcher [com.taff.hephaestustest.matchers.anOrderedCollectionWith].
      */
     fun <K> toBeAnUnorderedCollectionWith(vararg expecteds: K) {
-        matchers.add(anUnorderedCollectionWith(expecteds) as Matcher<T>)
+        matchers.add(anUnorderedCollectionWith(expecteds) as Matcher<A>)
     }
 
     /**
@@ -74,10 +67,10 @@ class Expectation<T> {
     /**
      * Checks whether the actual value satisfies the given predicate/condition.
      */
-    fun toSatisfy(description: String = "the specified condition", fxn: T.() -> Boolean) {
+    fun toSatisfy(description: String = "the specified condition", fxn: A.() -> Boolean) {
         matchers.add(
-            object : Matcher<T> {
-                override fun invoke(actual: T) =
+            object : Matcher<A> {
+                override fun invoke(actual: A) =
                     if (fxn(actual)) {
                         MatchResult.Match
                     } else {
@@ -94,8 +87,8 @@ class Expectation<T> {
      */
     fun toEqual(expected: Any?) {
         matchers.add(
-            object : Matcher<T?> {
-                override fun invoke(actual: T?) =
+            object : Matcher<A?> {
+                override fun invoke(actual: A?) =
                     if (expected == actual) {
                         MatchResult.Match
                     } else {
@@ -107,7 +100,7 @@ class Expectation<T> {
         )
     }
 
-    fun check(actual: T) = matchers.forEach {
+    fun check(actual: A) = matchers.forEach {
         assertThat(actual, it)
     }
 }
