@@ -1,7 +1,8 @@
 # Hephaestus Test #
 
-A suite of utilities for testing Hephaestus based projects. Provides the following:
-- A [Spek2](https://www.spekframework.org/) specification DSL for declaratively evaluating test expectations.
+A suite of utilities for testing [hephaestus](https://github.com/tpasipanodya/hephaestus-test) based projects. 
+Provides the following:
+- A [spek2](https://www.spekframework.org/) specification DSL for declaratively evaluating test expectations.
 - Declarative test matchers for arbitrarily comparing collections i.e, comparing lists & maps for logical equality 
   instead of relying on `setOf(1) == listOf(1)`
 - App lifecycle management that boots up and tears down different layers of your hephaestus project between tests,
