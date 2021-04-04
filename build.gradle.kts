@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.taff"
-version = "0.0.1" + (if (isSnapshotBuild()) "-SNAPSHOT" else "")
+version = "0.0.1${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
 java.sourceCompatibility = JavaVersion.VERSION_14
 
 repositories {
@@ -67,7 +67,7 @@ publishing {
 
 			pom {
 				name.set("project.name")
-				description.set("#{project.name} $version - Lightweight test utilities for hephaestus projects")
+				description.set("${project.name} $version - Lightweight test utilities for hephaestus projects")
 				url.set("https://github.com/tpasipanodya/hephaestus-test")
 
 				licenses {
@@ -95,6 +95,8 @@ publishing {
 	}
 }
 
+println("is snapshot yo?: ${System.getenv("IS_RELEASE_BUILD")}")
+
 artifactory {
 	setContextUrl("https://pasitaf.jfrog.io/artifactory/")
 
@@ -117,4 +119,4 @@ artifactory {
 	})
 }
 
-fun isSnapshotBuild() = System.getProperty("IS_SNAPSHOT_BUILD")?.toBoolean() == true
+fun isReleaseBuild() = System.getenv("IS_SNAPSHOT_BUILD")?.toBoolean() == true

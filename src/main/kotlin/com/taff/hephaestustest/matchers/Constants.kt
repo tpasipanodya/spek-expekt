@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 /**
  * default mappings of comparers used for fuzzy matching.
  */
-val defaultComparers = mutableMapOf<KClass<*>, (Any?, Any?) -> Boolean> (
+internal val defaultComparers = mutableMapOf<KClass<*>, (Any?, Any?) -> Boolean> (
 
     Int::class to ::compareInts,
 
