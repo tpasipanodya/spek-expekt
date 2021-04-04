@@ -95,8 +95,6 @@ publishing {
 	}
 }
 
-println("is snapshot yo?: ${System.getenv("IS_RELEASE_BUILD")}")
-
 artifactory {
 	setContextUrl("https://pasitaf.jfrog.io/artifactory/")
 
