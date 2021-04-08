@@ -16,11 +16,11 @@ inline fun <T> beAnUnOrderedCollectionOf(vararg expecteds: T) = object : Matcher
 
     override val description = "contains (${Config.objectMapper.writeValueAsString(expecteds)})"
 
-    override fun invoke(actuals: Iterable<T>) = actuals.toList().let { actualList ->
+    override fun invoke(actuals: Iterable<T>) = actuals!!.toList().let { actualList ->
         expecteds.all { expected->
             when (expected) {
                 is Matcher<*> -> {
-                    (expected.asPredicate() as (T?) -> Boolean).let { matcher ->
+                    (expected.asPredicate() as (T) -> Boolean).let { matcher ->
                         actualList.any { actual ->
                             try {
                                 matcher(actual)
