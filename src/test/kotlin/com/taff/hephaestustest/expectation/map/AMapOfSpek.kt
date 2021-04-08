@@ -10,7 +10,7 @@ import java.math.BigInteger
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-object AMapWithSpek : Spek({
+object AMapOfSpek : Spek({
 
     describe(".invoke") {
         fun correctlyMatchesTheExpectedValue(scenario: String, expectedValue: Any?, actualValue: Any?) =
