@@ -1,4 +1,4 @@
-package com.taff.hephaestustest.matchers
+package com.taff.hephaestustest.expectations
 
 import java.math.BigDecimal
 import java.math.BigInteger

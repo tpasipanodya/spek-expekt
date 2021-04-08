@@ -1,11 +1,14 @@
 package com.taff.hephaestustest
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.taff.hephaestustest.matchers.defaultComparers
+import com.taff.hephaestustest.expectations.defaultComparers
 import mu.NamedKLogging
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
+/**
+ * Configuration used throughout this library.
+ */
 object Config {
 
     /**
@@ -37,4 +40,11 @@ object Config {
      * when a value is expected to be of MyType, yur comparer will be used to compare the expected and actual values.
      */
     val comparers = defaultComparers
+}
+
+/**
+ * Configure this library.
+ */
+fun configure(fxn: Config.()-> Unit) {
+    fxn(Config)
 }

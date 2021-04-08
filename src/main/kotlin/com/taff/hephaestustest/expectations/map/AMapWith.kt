@@ -1,4 +1,4 @@
-package com.taff.hephaestustest.matchers
+package com.taff.hephaestustest.expectations
 
 import com.natpryce.hamkrest.MatchResult
 import com.natpryce.hamkrest.Matcher
@@ -6,11 +6,28 @@ import com.taff.hephaestustest.Config
 import java.lang.IllegalArgumentException
 
 /**
+ * Checks whether the expected set of entries are a subset of the actual map.
+ *
+ * values are compared using [com.taff.hephaestustest.Config.comparers]
+ * ```
+ * mapOf(1 to 2) should beAMapWith(mapOf(1 to 2))
+ * ```
+ */
+inline fun <K, V> beAMapWith(expectedMap: Map<K, V>) = expectedMap
+    .entries
+    .map { it.toPair() }
+    .toTypedArray()
+    .let { beAMapWith(*it) }
+
+/**
  * A matcher that checks whether the expected set of entries are a subset of the actual map.
  *
  * values are compared using [com.taff.hephaestustest.Config.comparers]
+ * ```
+ * mapOf(1 to 2) shouldNot beAMapWith(2 to 1)
+ * ```
  */
-inline fun <K> aMapWith(vararg expectedEntries: Pair<K, *>) = object : Matcher<Map<K, *>> {
+inline fun <K, V> beAMapWith(vararg expectedEntries: Pair<K, V>) = object : Matcher<Map<K, V>> {
 
     private val serializedEntries by lazy {
         """{${
@@ -22,9 +39,12 @@ inline fun <K> aMapWith(vararg expectedEntries: Pair<K, *>) = object : Matcher<M
 
     override val description = serializedEntries
 
-    override fun invoke(actuals: Map<K, *>) = expectedEntries
+    /**
+     * Compare the actual map against the expected map.
+     */
+    override fun invoke(actualMap: Map<K, V>) = expectedEntries
         .firstOrNull { (key, expected) ->
-            actuals[key]
+            actualMap[key]
                 ?.let { actual -> !actualValueMatchesExpected(actual, expected) }
                 ?: (expected != null)
         }.let { nonMatchingEntry ->
@@ -37,7 +57,7 @@ inline fun <K> aMapWith(vararg expectedEntries: Pair<K, *>) = object : Matcher<M
                     }
                 }
             } else {
-                MatchResult.Mismatch("expected to find the entry: {${nonMatchingEntry.first}: ${nonMatchingEntry.second}}. $ actualMap: $actuals")
+                MatchResult.Mismatch("expected to find the entry: {${nonMatchingEntry.first}: ${nonMatchingEntry.second}}. $ actualMap: $actualMap")
             }
         }
 

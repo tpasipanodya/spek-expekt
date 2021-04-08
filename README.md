@@ -8,7 +8,7 @@ Provides the following:
 - App lifecycle management that boots up and tears down different layers of your hephaestus project between tests,
   e.g starting up the web layer to run regression tests against the actual API and tearing it down when done.
 
-## Installation
+## Download
 
 ```kotlin
 implementation("com.taff:hephaestus-test:0.1.0")
@@ -16,59 +16,98 @@ implementation("com.taff:hephaestus-test:0.1.0")
 #### Using Gradle
 
 ## Use
+
 This library adheres to the principle of convention over configuration. Sane defaults are configured, but they are 
 also easily overridable. In general, this is a heavily configurable test orchestration library.
 
-### using the Specification DSL 
+## Setup
+
+```kotlin
+/**
+ * You can directly manipulate the mutable configuration variables
+ */
+Config.comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
+
+/**
+ * Or use the functional API
+ */
+configure {
+    comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
+}
+
+```
+
+Additional configuration details are discussed further [down here](Customising The Declarative Matchers)
+
+### Using the Specification DSL 
 ```kotlin
 fun add(num1: Long, num2: Long) = num1 + num2
 
 object AddSpek : Spek({
 
-    describe(".add") {
-        context("positive numbers") {
-            val result by memoized { add(2, 5) }
+    describe("demonstrating the DSL") {
+        context("testing addition using the eqalTo matcher") {
+           it("adds") { 
+             (1 + 1) should equal(2) 
+             (1 + 2) shouldNot equal(2)
+           }
+          
+        }
+        
+        context("testing addition using the satisfy matcher") {
+           it("adds") { 
+             (1 + 1) should satisfy { this == 2 }
+             (1 + 2) shouldNot satisfy { this == 2}
+           }
+        }
+        
+        context("testing for subsets using the beAnUnOrderedCollectionOf matcher") {
+            it("is a subset") { 
+              setOf(1, 3, 2) should beAnUnOrderedCollectionOf(2, 1)
+              setOf(1, 3, 2) shouldNot beAnUnOrderedCollectionOf(7, 1)
+            }
+        }
 
-            expect(result) { toEqual(7) }
+        context("testing for sublists using the beAnOrderedCollectionOf matcher") {
+          it("is a sublist") { 
+            listOf(1, 2, 3) should beAnOrderedCollectionOf(1, 2)
+            listOf(3, 2, 1) shouldNot beAnOrderedCollectionOf(1, 2)
+          }
+        }
+
+        context("comparing maps using the beAMapOf matcher") {
+          val map by memoized {
+            mapOf(1 to 2, 2 to mapOf(3 to mapOf("foo" to "bar")))
+          }
+          it("is a submap") {
+            map should beAMapOf(mapOf(2 to mapOf(3 to beAMapOf("foo" to "bar"))))
+            map shouldNot beAMapOf(mapOf(2 to mapOf(3 to beAMapOf("foo" to "lorem"))))
+          }
         }
     }
 })
 
 ```
 
-## Using The Declarative Matchers
-
-Declarative matchers are woven into the specification dsl and can be very useful for testing json 
-APIs without having to wrestle with static types and custom equality checks.
-
-```kotlin
-fun add(num1: Long, num2: Long) = num1 + num2
-
-object AddSpek : Spek({
-
-    describe(".add") {
-        context("positive numbers") {
-            val result by memoized { 
-                mapOf("actual" to listOf(add(2, 5))) 
-            }
-
-            expect(result) { 
-                toBeAMapWith("actual" to anOrderdCollectionWith(7)) 
-            }
-        }
-    }
-})
-
-```
+## Customising The Declarative Matchers
 
 How the expected value for any given map entry or collection element is compared against the actual 
-corresponding value can be customized by setting your own comparer. For example, adding a custom 
+value can be customized by setting your own comparers. For example, adding a custom 
 comparer for strings:
 
 ```kotlin
 Config.comparers[String::class] = { expected: Any?, actual: Any? ->
     expected == actual 
 }
+
+/* or */
+
+
+configure {
+  comparers[String::class] = { expected: Any?, actual: Any? ->
+    expected == actual
+  }
+}
 ```
 
-Configured comparers apply to all matchers.
+Configured comparers apply to all collection/map matchers.

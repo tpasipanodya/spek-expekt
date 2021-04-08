@@ -1,4 +1,4 @@
-package com.taff.hephaestustest.matchers
+package com.taff.hephaestustest.expectations
 
 import com.taff.hephaestustest.Config
 import java.math.BigDecimal
@@ -170,7 +170,7 @@ fun _compare(expected: Any?, actual: Any?) : Boolean = expected?.let { safeExpec
                 if (actual is Iterable<*>) {
                     val expectedList = expected.toList()
                     val actualList = actual.toList()
-                    anOrderedCollectionWith(*expectedList.toTypedArray())
+                    beAnOrderedCollectionOf(*expectedList.toTypedArray())
                         .asPredicate()
                         .invoke(actualList) && actualList.size == expectedList.size
                 } else (expected == actual)
@@ -180,7 +180,7 @@ fun _compare(expected: Any?, actual: Any?) : Boolean = expected?.let { safeExpec
                 if (actual is Map<*, *>) {
                     val expectedEntries = expected.map { it.toPair() }.toTypedArray()
                     val actualMap = actual as Map<Any?, *>
-                    aMapWith(*expectedEntries)
+                    beAMapWith(*expectedEntries)
                         .asPredicate()
                         .invoke(actualMap) && actualMap.size == expected.size
                 } else (expected == actual)

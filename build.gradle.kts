@@ -61,6 +61,11 @@ tasks {
 		dependsOn(dokkaHtml)
 		archiveClassifier.set("javadoc")
 	}
+
+	register<Jar>("sourcesJar") {
+		from(sourceSets.main.get().allSource)
+		archiveClassifier.set("sources")
+	}
 }
 
 tasks.withType<Test> { useJUnitPlatform() }
@@ -74,6 +79,7 @@ publishing {
 
 			artifact("$buildDir/libs/${project.name}-${project.version}.jar")
 			artifact(tasks["dokkaJar"])
+			artifact(tasks["sourcesJar"])
 
 			pom {
 				name.set("project.name")
@@ -111,7 +117,7 @@ artifactory {
 	publish(delegateClosureOf<PublisherConfig> {
 
 		repository(delegateClosureOf<GroovyObject> {
-			setProperty("repoKey", "snapshots")
+			setProperty("repoKey", if (isReleaseBuild()) "releases" else "snapshots")
 			setProperty("username", System.getenv("ARTIFACTORY_USER"))
 			setProperty("password", System.getenv("ARTIFACTORY_PASSWORD"))
 			setProperty("maven", true)
@@ -123,7 +129,7 @@ artifactory {
 	})
 
 	resolve(delegateClosureOf<ResolverConfig> {
-		setProperty("repoKey", "hephaestus-test")
+		setProperty("repoKey", if (isReleaseBuild()) "releases" else "snapshots")
 	})
 }
 

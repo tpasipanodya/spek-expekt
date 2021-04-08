@@ -1,12 +1,24 @@
 package com.taff.hephaestustest.expectations
 
+import com.natpryce.hamkrest.Matcher
+import com.natpryce.hamkrest.assertion.assertThat
+
 /**
- * declarativeky use matchers to run your assrtations, e.g:
+ * Declaratively use matchers on objects of type `T`, e.g:
  *
- * expect(mapOf(1 to 2)) {
- *    toBeAMapWith(1 to 2)
- * }
+ * ```
+ * 1 should equal(1)
+ * ```
+ * @param T The expected value's type.
  */
-fun <T> expect(actual: T, body: Expectation<T>.() -> Unit) = Expectation<T>()
-    .apply(body)
-    .check(actual)
+infix fun <T> T.should(matcher: Matcher<T>) = assertThat(this, matcher)
+
+
+/**
+ * Declaratively use matchers on objects of type `T`, e.g:
+ * ```
+ * 1 shouldNot equal(2)
+ * ```
+ */
+infix fun <T> T.shouldNot(matcher: Matcher<T>) = assertThat(this, matcher.not())
+
