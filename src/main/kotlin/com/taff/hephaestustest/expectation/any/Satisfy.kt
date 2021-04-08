@@ -1,4 +1,4 @@
-package com.taff.hephaestustest.expectations.any
+package com.taff.hephaestustest.expectation.any
 
 import com.natpryce.hamkrest.MatchResult
 import com.natpryce.hamkrest.Matcher
@@ -28,5 +28,5 @@ inline fun <T> satisfy(description: String = "satisfies the given condition", cr
  * 1 should equal(1)
  * ```
  */
-inline fun <T> equal(expected: T) = equalTo(expected)
+inline fun <T> equal(expected: T) = satisfy<T> { this == expected }
 

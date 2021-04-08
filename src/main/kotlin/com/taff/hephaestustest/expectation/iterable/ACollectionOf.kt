@@ -1,9 +1,9 @@
-package com.taff.hephaestustest.expectations.iterable
+package com.taff.hephaestustest.expectation.iterable
 
 import com.natpryce.hamkrest.MatchResult
 import com.natpryce.hamkrest.Matcher
 import com.taff.hephaestustest.Config
-import com.taff.hephaestustest.expectations._compare
+import com.taff.hephaestustest.expectation._compare
 
 /**
  * Compares 2 collections, ignoring ordering. elements are compared using fuzzy matching logic defined in

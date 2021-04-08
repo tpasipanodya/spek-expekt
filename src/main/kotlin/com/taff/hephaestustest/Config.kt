@@ -1,7 +1,7 @@
 package com.taff.hephaestustest
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.taff.hephaestustest.expectations.defaultComparers
+import com.taff.hephaestustest.expectation.defaultComparers
 import mu.NamedKLogging
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter

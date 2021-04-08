@@ -1,6 +1,6 @@
-package com.taff.hephaestustest.expectations.boolean
+package com.taff.hephaestustest.expectation.boolean
 
-import com.taff.hephaestustest.expectations.any.satisfy
+import com.taff.hephaestustest.expectation.any.satisfy
 
 /**
  * Declaratively checks whether the actual value == true

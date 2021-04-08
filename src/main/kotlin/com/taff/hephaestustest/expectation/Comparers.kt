@@ -1,8 +1,8 @@
-package com.taff.hephaestustest.expectations
+package com.taff.hephaestustest.expectation
 
 import com.taff.hephaestustest.Config
-import com.taff.hephaestustest.expectations.iterable.beAnOrderedCollectionOf
-import com.taff.hephaestustest.expectations.map.beAMapOf
+import com.taff.hephaestustest.expectation.iterable.beAnOrderedCollectionOf
+import com.taff.hephaestustest.expectation.map.beAMapOf
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.time.OffsetDateTime

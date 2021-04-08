@@ -1,6 +1,6 @@
-package com.taff.hephaestustest.expectations.boolean
+package com.taff.hephaestustest.expectation.boolean
 
-import com.taff.hephaestustest.expectations.should
+import com.taff.hephaestustest.expectation.should
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
