@@ -2,7 +2,7 @@ package com.taff.hephaestustest.expectations
 
 import com.taff.hephaestustest.Config
 import com.taff.hephaestustest.expectations.iterable.beAnOrderedCollectionOf
-import com.taff.hephaestustest.expectations.map.beAMapWith
+import com.taff.hephaestustest.expectations.map.beAMapOf
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.time.OffsetDateTime
@@ -182,7 +182,7 @@ fun _compare(expected: Any?, actual: Any?) : Boolean = expected?.let { safeExpec
                 if (actual is Map<*, *>) {
                     val expectedEntries = expected.map { it.toPair() }.toTypedArray()
                     val actualMap = actual as Map<Any?, *>
-                    beAMapWith(*expectedEntries)
+                    beAMapOf(*expectedEntries)
                         .asPredicate()
                         .invoke(actualMap) && actualMap.size == expected.size
                 } else (expected == actual)

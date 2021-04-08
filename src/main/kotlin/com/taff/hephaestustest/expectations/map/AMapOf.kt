@@ -11,24 +11,24 @@ import java.lang.IllegalArgumentException
  *
  * values are compared using [com.taff.hephaestustest.Config.comparers]
  * ```
- * mapOf(1 to 2) should beAMapWith(mapOf(1 to 2))
+ * mapOf(1 to 2) should beAMapOf(mapOf(1 to 2))
  * ```
  */
-inline fun <K, V> beAMapWith(expectedMap: Map<K, V>) = expectedMap
+inline fun <K, V> beAMapOf(expectedMap: Map<K, V>) = expectedMap
     .entries
     .map { it.toPair() }
     .toTypedArray()
-    .let { beAMapWith(*it) }
+    .let { beAMapOf(*it) }
 
 /**
  * A matcher that checks whether the expected set of entries are a subset of the actual map.
  *
  * values are compared using [com.taff.hephaestustest.Config.comparers]
  * ```
- * mapOf(1 to 2) shouldNot beAMapWith(2 to 1)
+ * mapOf(1 to 2) shouldNot beAMapOf(2 to 1)
  * ```
  */
-inline fun <K, V> beAMapWith(vararg expectedEntries: Pair<K, V>) = object : Matcher<Map<K, V>> {
+inline fun <K, V> beAMapOf(vararg expectedEntries: Pair<K, V>) = object : Matcher<Map<K, V>> {
 
     private val serializedEntries by lazy {
         """{${

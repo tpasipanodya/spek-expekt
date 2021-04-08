@@ -9,7 +9,7 @@ import com.taff.hephaestustest.expectations._compare
  * Compares 2 collections, ignoring ordering. elements are compared using fuzzy matching logic defined in
  * [com.taff.hephaestustest.Config.compaprers] and recursively for nested matchers, e.g:
  * ```
- * setOf(1, 2) shouldNot beAnOrderedCollectionWith(1, 2, 3)
+ * setOf(1, 2) shouldNot beAnOrderedCollectionOf(1, 2, 3)
  * ```
  */
 inline fun <T> beAnUnOrderedCollectionOf(vararg expecteds: T) = object : Matcher<Iterable<T>> {
@@ -44,7 +44,7 @@ inline fun <T> beAnUnOrderedCollectionOf(vararg expecteds: T) = object : Matcher
  * Compares 2 collections with strict ordering. elements are compared using fuzzy matching logic defined in
  * [com.taff.hephaestustest.Config.comparers] and recursively for nested matchers, e.g:
  * ```
- * arrayOf(3, 2, 1) should beAnOrderedCollectionWith(3, 2, 1)
+ * arrayOf(3, 2, 1) should beAnOrderedCollectionOf(3, 2, 1)
  * ```
  */
 inline fun <T> beAnOrderedCollectionOf(vararg expecteds: T) = object : Matcher<Iterable<T>> {

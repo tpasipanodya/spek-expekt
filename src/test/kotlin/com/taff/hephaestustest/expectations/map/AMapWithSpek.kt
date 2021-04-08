@@ -19,7 +19,7 @@ object AMapWithSpek : Spek({
                 val expected by memoized { arrayOf(1 to expectedValue) }
 
                 it("correctly matches") {
-                    actual should beAMapWith(*expected)
+                    actual should beAMapOf(*expected)
                 }
             }
 
@@ -29,7 +29,7 @@ object AMapWithSpek : Spek({
                 val expected by memoized { arrayOf(1 to expectedValue) }
 
                 it("correctly matches") {
-                    actual shouldNot beAMapWith(*expected)
+                    actual shouldNot beAMapOf(*expected)
                 }
             }
 
@@ -76,25 +76,25 @@ object AMapWithSpek : Spek({
                 context("nested comparisons") {
                     correctlyMatchesTheExpectedValue(
                         scenario = "1 level nesting",
-                        expectedValue = beAMapWith(2 to 3),
+                        expectedValue = beAMapOf(2 to 3),
                         actualValue = mapOf(2 to 3)
                     )
 
                     correctlyMatchesTheExpectedValue(
                         scenario = "1 level nesting with a collection matcher",
-                        expectedValue = beAMapWith(2 to beAnOrderedCollectionOf(3)),
+                        expectedValue = beAMapOf(2 to beAnOrderedCollectionOf(3)),
                         actualValue = mapOf(2 to listOf(3))
                     )
 
                     correctlyMatchesTheExpectedValue(
                         scenario = "2 level nesting",
-                        expectedValue = beAMapWith("foo" to beAMapWith(2 to 3)),
+                        expectedValue = beAMapOf("foo" to beAMapOf(2 to 3)),
                         actualValue = mapOf("foo" to mapOf(2 to 3))
                     )
 
                     correctlyMatchesTheExpectedValue(
                         scenario = "3 level nesting with a collection matcher and map matcher",
-                        expectedValue = beAMapWith("foo" to beAnOrderedCollectionOf(beAMapWith(2 to 3))),
+                        expectedValue = beAMapOf("foo" to beAnOrderedCollectionOf(beAMapOf(2 to 3))),
                         actualValue = mapOf("foo" to listOf(mapOf(2 to 3)))
                     )
                 }
@@ -142,25 +142,25 @@ object AMapWithSpek : Spek({
                 context("nested comparisons") {
                     correctlyMismatchesTheExpectedValue(
                         scenario = "1 level nesting",
-                        expectedValue = beAMapWith(2 to 4),
+                        expectedValue = beAMapOf(2 to 4),
                         actualValue = mapOf(2 to 3)
                     )
 
                     correctlyMismatchesTheExpectedValue(
                         scenario = "1 level nesting with a collection matcher",
-                        expectedValue = beAMapWith(2 to beAnOrderedCollectionOf(4)),
+                        expectedValue = beAMapOf(2 to beAnOrderedCollectionOf(4)),
                         actualValue = mapOf(2 to listOf(3))
                     )
 
                     correctlyMismatchesTheExpectedValue(
                         scenario = "2 level nesting",
-                        expectedValue = beAMapWith("foo" to beAMapWith(2 to 4)),
+                        expectedValue = beAMapOf("foo" to beAMapOf(2 to 4)),
                         actualValue = mapOf("foo" to mapOf(2 to 3))
                     )
 
                     correctlyMismatchesTheExpectedValue(
                         scenario = "3 level nesting with a collection matcher and map matcher",
-                        expectedValue = beAMapWith("foo" to beAnOrderedCollectionOf(beAMapWith(2 to 4))),
+                        expectedValue = beAMapOf("foo" to beAnOrderedCollectionOf(beAMapOf(2 to 4))),
                         actualValue = mapOf("foo" to listOf(mapOf(2 to 3)))
                     )
                 }
@@ -186,14 +186,14 @@ object AMapWithSpek : Spek({
                 context("nested maps") {
                     correctlyMatchesTheExpectedValue(
                         scenario = "matching strings",
-                        expectedValue = beAMapWith("hello" to "world"),
+                        expectedValue = beAMapOf("hello" to "world"),
                         actualValue = mapOf("hello" to "world")
                     )
 
                     OffsetDateTime.now().let { now ->
                         correctlyMatchesTheExpectedValue(
                             scenario = "matching dates encoded as Strings",
-                            expectedValue = beAMapWith("hello" to now),
+                            expectedValue = beAMapOf("hello" to now),
                             actualValue = mapOf("hello" to now.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)),
                         )
                     }
@@ -218,13 +218,13 @@ object AMapWithSpek : Spek({
                 context("nexted maps") {
                     correctlyMismatchesTheExpectedValue(
                         scenario = "matching strings",
-                        expectedValue = beAMapWith("hello" to "world"),
+                        expectedValue = beAMapOf("hello" to "world"),
                         actualValue = mapOf("hello" to "waldo")
                     )
                     OffsetDateTime.now().let { now ->
                         correctlyMismatchesTheExpectedValue(
                             scenario = "matching dates encoded as Strings",
-                            expectedValue = beAMapWith("hello" to now),
+                            expectedValue = beAMapOf("hello" to now),
                             actualValue = mapOf("hello" to now.plusDays(1).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)),
                         )
                     }
@@ -249,12 +249,12 @@ object AMapWithSpek : Spek({
             context("nested comparisons") {
                 correctlyMatchesTheExpectedValue(
                     scenario = "when 1 level nesting matches",
-                    expectedValue = beAMapWith("items" to true),
+                    expectedValue = beAMapOf("items" to true),
                     actualValue = mapOf("items" to true)
                 )
                 correctlyMismatchesTheExpectedValue(
                     scenario = "when 1 level nesting doesn't match",
-                    expectedValue = beAMapWith("items" to true),
+                    expectedValue = beAMapOf("items" to true),
                     actualValue = mapOf("items" to false)
                 )
             }

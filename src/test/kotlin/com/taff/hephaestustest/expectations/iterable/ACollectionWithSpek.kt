@@ -5,7 +5,7 @@ import com.taff.hephaestustest.expectations.shouldNot
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
-object ACollectionWithSpek : Spek({
+object ACollectionOfSpek : Spek({
 
     val actual by memoized { listOf(1, 2) }
     val expected by memoized { listOf(1, 2) }
