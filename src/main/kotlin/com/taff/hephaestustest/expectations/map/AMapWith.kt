@@ -1,8 +1,9 @@
-package com.taff.hephaestustest.expectations
+package com.taff.hephaestustest.expectations.map
 
 import com.natpryce.hamkrest.MatchResult
 import com.natpryce.hamkrest.Matcher
 import com.taff.hephaestustest.Config
+import com.taff.hephaestustest.expectations._compare
 import java.lang.IllegalArgumentException
 
 /**

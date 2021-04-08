@@ -1,7 +1,6 @@
 package com.taff.hephaestustest.expectations.map
 
-import com.taff.hephaestustest.expectations.beAMapWith
-import com.taff.hephaestustest.expectations.beAnOrderedCollectionOf
+import com.taff.hephaestustest.expectations.iterable.beAnOrderedCollectionOf
 import com.taff.hephaestustest.expectations.should
 import com.taff.hephaestustest.expectations.shouldNot
 import org.spekframework.spek2.Spek

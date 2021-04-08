@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0]
 
 - Initiated README
-- Added Spek2 `expect` DSL.
+- Added Spek2 `should` DSL.
 - Added map and collection matchers
+- Added `satisfy` and `true`/`false` matchers
 

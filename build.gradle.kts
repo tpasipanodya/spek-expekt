@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "com.taff"
-version = "0.0.1${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
+version = "0.1.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
 java.sourceCompatibility = JavaVersion.VERSION_14
 
 repositories {
@@ -35,8 +35,8 @@ configurations {
 }
 
 dependencies {
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	runtimeOnly("org.jetbrains.kotlin:kotlin-reflect")
+	runtimeOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	api("io.github.microutils:kotlin-logging-jvm:2.0.6")
 	api("com.natpryce:hamkrest:1.8.0.1")
 	api("com.google.guava:guava:30.1.1-jre")
@@ -72,12 +72,21 @@ tasks.withType<Test> { useJUnitPlatform() }
 
 publishing {
 	publications {
-		create<MavenPublication>("jar") {
+		create<MavenPublication>("mavenJava") {
 			this.groupId = project.group.toString()
 			this.artifactId = project.name
 			this.version = project.version.toString()
 
-			artifact("$buildDir/libs/${project.name}-${project.version}.jar")
+			from(components["java"])
+			versionMapping {
+				usage("java-api") {
+					fromResolutionOf("runtimeClasspath")
+				}
+				usage("java-runtime") {
+					fromResolutionResult()
+				}
+			}
+
 			artifact(tasks["dokkaJar"])
 			artifact(tasks["sourcesJar"])
 
@@ -124,7 +133,7 @@ artifactory {
 		})
 
 		defaults(delegateClosureOf<GroovyObject> {
-			invokeMethod("publications", "jar")
+			invokeMethod("publications", "mavenJava")
 		})
 	})
 
