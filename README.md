@@ -31,7 +31,7 @@ Config.comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
 /**
  * Or use the functional API
  */
-configure {
+val hephaestusTestConfig = configure {
     comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
 }
 
@@ -41,17 +41,14 @@ Additional configuration details are discussed further [down here](Customising T
 
 ### Using the Specification DSL 
 ```kotlin
-fun add(num1: Long, num2: Long) = num1 + num2
-
 object AddSpek : Spek({
 
     describe("demonstrating the DSL") {
-        context("testing addition using the eqalTo matcher") {
+        context("testing addition using the equalTo matcher") {
            it("adds") { 
              (1 + 1) should equal(2) 
              (1 + 2) shouldNot equal(2)
            }
-          
         }
         
         context("testing addition using the satisfy matcher") {
@@ -79,7 +76,7 @@ object AddSpek : Spek({
           val map by memoized {
             mapOf(1 to 2, 2 to mapOf(3 to mapOf("foo" to "bar")))
           }
-          it("is a submap") {
+          it("is a sub-map") {
             map should beAMapOf(mapOf(2 to mapOf(3 to beAMapOf("foo" to "bar"))))
             map shouldNot beAMapOf(mapOf(2 to mapOf(3 to beAMapOf("foo" to "lorem"))))
           }
@@ -103,7 +100,7 @@ Config.comparers[String::class] = { expected: Any?, actual: Any? ->
 /* or */
 
 
-configure {
+val hephaestusTestConfig = configure {
   comparers[String::class] = { expected: Any?, actual: Any? ->
     expected == actual
   }

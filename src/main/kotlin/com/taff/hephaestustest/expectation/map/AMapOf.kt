@@ -58,7 +58,7 @@ inline fun <K, V> beAMapOf(vararg expectedEntries: Pair<K, V>) = object : Matche
                     }
                 }
             } else {
-                MatchResult.Mismatch("expected to find the entry: {${nonMatchingEntry.first}: ${nonMatchingEntry.second}}. $ actualMap: $actualMap")
+                MatchResult.Mismatch("actualMap: $actualMap\n problematic entry: {${nonMatchingEntry.first}: ${nonMatchingEntry.second}}")
             }
         }
 
@@ -82,4 +82,6 @@ inline fun <K, V> beAMapOf(vararg expectedEntries: Pair<K, V>) = object : Matche
         "Cannot compare the actual value against the expected because the actual value's type is unknown." +
                 "\n\tactual value $actual\n\texpected value: $expected ", e
     )
+
+    override fun toString() = description
 }

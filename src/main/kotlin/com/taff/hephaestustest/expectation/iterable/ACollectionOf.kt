@@ -14,7 +14,7 @@ import com.taff.hephaestustest.expectation._compare
  */
 inline fun <T> beAnUnOrderedCollectionOf(vararg expecteds: T) = object : Matcher<Iterable<T>> {
 
-    override val description = "contains (${Config.objectMapper.writeValueAsString(expecteds)})"
+    override val description = "containing${Config.objectMapper.writeValueAsString(expecteds)}"
 
     override fun invoke(actuals: Iterable<T>) = actuals!!.toList().let { actualList ->
         expecteds.all { expected->
@@ -38,6 +38,8 @@ inline fun <T> beAnUnOrderedCollectionOf(vararg expecteds: T) = object : Matcher
         if (suceeded) MatchResult.Match
         else MatchResult.Mismatch("actual: ${Config.objectMapper.writeValueAsString(actuals)}")
     }
+
+    override fun toString() = description
 }
 
 /**
@@ -49,30 +51,31 @@ inline fun <T> beAnUnOrderedCollectionOf(vararg expecteds: T) = object : Matcher
  */
 inline fun <T> beAnOrderedCollectionOf(vararg expecteds: T) = object : Matcher<Iterable<T>> {
 
-    override val description = "contains (${Config.objectMapper.writeValueAsString(expecteds)})"
+    override val description = "containingInOrder${Config.objectMapper.writeValueAsString(expecteds)}"
 
     override fun invoke(actuals: Iterable<T>) = actuals.toList().let { actualList ->
         expecteds.mapIndexed { index, expected ->
             if (index >= actualList.size) {
-                MatchResult.Mismatch(
-                    "Expected $expected to be in the collection but it wasn't. Actual collection: ${Config.objectMapper.writeValueAsString(actuals)}"
-                )
+                mismatch(expected, actuals)
             } else {
                 val actual = actualList[index]
-                val misMatch = MatchResult.Mismatch("Expected $expected to be in the collection but it wasn't. Actual collection: ${Config.objectMapper.writeValueAsString(actuals)}")
 
                 when (expected) {
                     is Matcher<*> -> {
                         try { (expected as Matcher<T?>).invoke(actual) }
 
-                        catch (e: ClassCastException) { misMatch }
+                        catch (e: ClassCastException) { mismatch(expected, actuals) }
                     }
 
                     else -> if (_compare(expected, actual)) {
                         MatchResult.Match
-                    } else misMatch
+                    } else mismatch(expected, actuals)
                 }
             }
         }
     }.firstOrNull { it is MatchResult.Mismatch } ?: MatchResult.Match
+
+    override fun toString() = description
+
+    private fun mismatch(expected: T, actuals: Iterable<T>) =  MatchResult.Mismatch("Actual iterable: ${Config.objectMapper.writeValueAsString(actuals)}\n missing item: $expected")
 }
