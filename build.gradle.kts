@@ -82,9 +82,6 @@ publishing {
 				usage("java-api") {
 					fromResolutionOf("runtimeClasspath")
 				}
-				usage("java-runtime") {
-					fromResolutionResult()
-				}
 			}
 
 			artifact(tasks["dokkaJar"])

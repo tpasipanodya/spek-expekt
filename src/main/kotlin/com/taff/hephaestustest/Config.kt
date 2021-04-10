@@ -1,6 +1,11 @@
 package com.taff.hephaestustest
 
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.databind.util.StdDateFormat
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.taff.hephaestustest.expectation.defaultComparers
 import mu.NamedKLogging
 import java.time.OffsetDateTime
@@ -14,7 +19,10 @@ object Config {
     /**
      * used for serializing objects for logging as well as deserializing json into lists and maps.
      */
-    var objectMapper = ObjectMapper()
+    var objectMapper = jacksonObjectMapper().apply {
+        configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        registerModule(JavaTimeModule())
+    }
 
     /**
      * Used for deserializing dates. When dates are represented as strings (e.g after a partially complete json eserialization),

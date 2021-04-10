@@ -6,6 +6,8 @@ import com.taff.hephaestustest.expectation.map.beAMapOf
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.time.OffsetDateTime
+import java.time.temporal.ChronoUnit
+import java.time.temporal.Temporal
 
 /**
  * Compare 2 items that implement Comparable. May throw class cast exceptions.
@@ -151,12 +153,14 @@ internal fun compareBigDecimals(expected: Any?, actual: Any?) = when(expected) {
  */
 internal fun compareDateTimes(expected: Any?, actual: Any?) = if (actual is String) {
     when (expected) {
-        is OffsetDateTime -> compareValues(Config.dateTimeDeserializer(actual), expected) == 0
+        is Temporal -> ChronoUnit.MILLIS.between(Config.dateTimeDeserializer(actual), expected) == 0L
 
         is Comparable<*> -> compareValues(actual, expected) == 0
 
         else -> expected == actual
     }
+} else if (actual is Temporal && expected is Temporal){
+    ChronoUnit.MILLIS.between(actual, expected) == 0L
 } else expected == actual
 
 /**
