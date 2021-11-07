@@ -16,11 +16,11 @@ version = "0.1.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
 java.sourceCompatibility = JavaVersion.VERSION_14
 
 repositories {
-	jcenter()
+	mavenCentral()
 	maven("https://jitpack.io")
 	maven {
 		name = "JFrog"
-		url = uri("https://pasitaf.jfrog.io/artifactory/releases")
+		url = uri("https://tmpasipanodya.jfrog.io/artifactory/releases")
 		credentials {
 			username = System.getenv("ARTIFACTORY_USER")
 			password = System.getenv("ARTIFACTORY_PASSWORD")
