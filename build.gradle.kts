@@ -4,9 +4,9 @@ import org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig
 import groovy.lang.GroovyObject
 
 plugins {
-	kotlin("jvm") version "1.4.32"
-	id("com.jfrog.artifactory") version "4.21.0"
-	id("org.jetbrains.dokka") version "1.4.30"
+	kotlin("jvm") version "1.5.31"
+	id("com.jfrog.artifactory") version "4.24.21"
+	id("org.jetbrains.dokka") version "1.5.31"
 	id("maven-publish")
 	idea
 }
@@ -133,4 +133,4 @@ artifactory {
 	})
 }
 
-fun isReleaseBuild() = System.getenv("IS_SNAPSHOT_BUILD")?.toBoolean() == true
+fun isReleaseBuild() = System.getenv("IS_RELEASE_BUILD")?.toBoolean() == true
