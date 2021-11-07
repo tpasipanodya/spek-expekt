@@ -4,10 +4,10 @@ import org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig
 import groovy.lang.GroovyObject
 
 plugins {
-	kotlin("jvm") version "1.4.32"
-	id("com.jfrog.artifactory") version "4.21.0"
-	id("org.jetbrains.dokka") version "1.4.30"
-	`maven-publish`
+	kotlin("jvm") version "1.5.31"
+	id("com.jfrog.artifactory") version "4.24.21"
+	id("org.jetbrains.dokka") version "1.5.31"
+	id("maven-publish")
 	idea
 }
 
@@ -16,11 +16,11 @@ version = "0.1.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
 java.sourceCompatibility = JavaVersion.VERSION_14
 
 repositories {
-	jcenter()
+	mavenCentral()
 	maven("https://jitpack.io")
 	maven {
 		name = "JFrog"
-		url = uri("https://pasitaf.jfrog.io/artifactory/releases")
+		url = uri("https://tmpasipanodya.jfrog.io/artifactory/releases")
 		credentials {
 			username = System.getenv("ARTIFACTORY_USER")
 			password = System.getenv("ARTIFACTORY_PASSWORD")
@@ -37,15 +37,15 @@ configurations {
 dependencies {
 	runtimeOnly("org.jetbrains.kotlin:kotlin-reflect")
 	runtimeOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	api("io.github.microutils:kotlin-logging-jvm:2.0.6")
+	api("io.github.microutils:kotlin-logging-jvm:2.0.11")
 	api("com.natpryce:hamkrest:1.8.0.1")
-	api("com.google.guava:guava:30.1.1-jre")
-	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.0")
-	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.0")
+	api("com.google.guava:guava:31.0.1-jre")
+	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
+	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0")
 	api("org.junit.jupiter:junit-jupiter")
-	api(enforcedPlatform("org.junit:junit-bom:5.7.1"))
-	api("org.spekframework.spek2:spek-dsl-jvm:2.0.15")
-	api("org.spekframework.spek2:spek-runner-junit5:2.0.15")
+	implementation(enforcedPlatform("org.junit:junit-bom:5.8.1"))
+	api("org.spekframework.spek2:spek-dsl-jvm:2.0.17")
+	api("org.spekframework.spek2:spek-runner-junit5:2.0.17")
 }
 
 tasks.withType<KotlinCompile> {
@@ -70,20 +70,15 @@ tasks {
 
 tasks.withType<Test> { useJUnitPlatform() }
 
+tasks.withType<GenerateModuleMetadata> {
+	suppressedValidationErrors.add("enforced-platform")
+}
+
 publishing {
 	publications {
 		create<MavenPublication>("mavenJava") {
-			this.groupId = project.group.toString()
-			this.artifactId = project.name
-			this.version = project.version.toString()
 
 			from(components["java"])
-			versionMapping {
-				usage("java-api") {
-					fromResolutionOf("runtimeClasspath")
-				}
-			}
-
 			artifact(tasks["dokkaJar"])
 			artifact(tasks["sourcesJar"])
 
@@ -112,13 +107,12 @@ publishing {
 					url.set("http://github.com/tpasipanodya/hephaestus-test/tree/main")
 				}
 			}
-
 		}
 	}
 }
 
 artifactory {
-	setContextUrl("https://pasitaf.jfrog.io/artifactory/")
+	setContextUrl("https://tmpasipanodya.jfrog.io/artifactory/")
 
 	publish(delegateClosureOf<PublisherConfig> {
 
@@ -139,4 +133,4 @@ artifactory {
 	})
 }
 
-fun isReleaseBuild() = System.getenv("IS_SNAPSHOT_BUILD")?.toBoolean() == true
+fun isReleaseBuild() = System.getenv("IS_RELEASE_BUILD")?.toBoolean() == true
