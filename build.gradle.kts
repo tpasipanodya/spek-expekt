@@ -4,7 +4,7 @@ import org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig
 import groovy.lang.GroovyObject
 
 plugins {
-	kotlin("jvm") version "1.5.31"
+	kotlin("jvm") version "1.6.0"
 	id("com.jfrog.artifactory") version "4.24.21"
 	id("org.jetbrains.dokka") version "1.5.31"
 	id("maven-publish")
@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "com.taff"
-version = "0.1.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
+version = "0.2.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
 java.sourceCompatibility = JavaVersion.VERSION_14
 
 repositories {
@@ -43,7 +43,7 @@ dependencies {
 	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
 	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0")
 	api("org.junit.jupiter:junit-jupiter")
-	api(enforcedPlatform("org.junit:junit-bom:5.8.1"))
+	implementation(enforcedPlatform("org.junit:junit-bom:5.8.1"))
 	api("org.spekframework.spek2:spek-dsl-jvm:2.0.17")
 	api("org.spekframework.spek2:spek-runner-junit5:2.0.17")
 }
