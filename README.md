@@ -11,7 +11,7 @@ Provides the following:
 ## Download
 
 ```kotlin
-implementation("com.taff:hephaestus-test:0.1.0")
+implementation("io.taff:hephaestus-test:0.1.0")
 ```
 #### Using Gradle
 

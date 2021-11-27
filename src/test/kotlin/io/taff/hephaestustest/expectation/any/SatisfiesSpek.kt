@@ -1,7 +1,7 @@
-package com.taff.hephaestustest.expectation.any
+package io.taff.hephaestustest.expectation.any
 
-import com.taff.hephaestustest.expectation.should
-import com.taff.hephaestustest.expectation.shouldNot
+import io.taff.hephaestustest.expectation.should
+import io.taff.hephaestustest.expectation.shouldNot
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 

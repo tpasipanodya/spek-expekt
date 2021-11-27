@@ -6,14 +6,14 @@ import groovy.lang.GroovyObject
 plugins {
 	kotlin("jvm") version "1.6.0"
 	id("com.jfrog.artifactory") version "4.24.21"
-	id("org.jetbrains.dokka") version "1.5.31"
+	id("org.jetbrains.dokka") version "1.6.0"
 	id("maven-publish")
 	idea
 }
 
-group = "com.taff"
+group = "io.taff"
 version = "0.2.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
-java.sourceCompatibility = JavaVersion.VERSION_14
+java.sourceCompatibility = JavaVersion.VERSION_16
 
 repositories {
 	mavenCentral()
@@ -51,7 +51,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "14"
+		jvmTarget = "16"
 	}
 }
 

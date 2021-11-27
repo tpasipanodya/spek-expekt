@@ -1,4 +1,4 @@
-package com.taff.hephaestustest
+package io.taff.hephaestustest
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.util.StdDateFormat
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.taff.hephaestustest.expectation.defaultComparers
+import io.taff.hephaestustest.expectation.defaultComparers
 import mu.NamedKLogging
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
