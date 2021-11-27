@@ -1,15 +1,15 @@
-package com.taff.hephaestustest.expectation.map
+package io.taff.hephaestustest.expectation.map
 
 import com.natpryce.hamkrest.MatchResult
 import com.natpryce.hamkrest.Matcher
-import com.taff.hephaestustest.Config
-import com.taff.hephaestustest.expectation._compare
+import io.taff.hephaestustest.Config
+import io.taff.hephaestustest.expectation._compare
 import java.lang.IllegalArgumentException
 
 /**
  * Checks whether the expected set of entries are a subset of the actual map.
  *
- * values are compared using [com.taff.hephaestustest.Config.comparers]
+ * values are compared using [io.taff.hephaestustest.Config.comparers]
  * ```
  * mapOf(1 to 2) should beAMapOf(mapOf(1 to 2))
  * ```
@@ -23,7 +23,7 @@ inline fun <K, V> beAMapOf(expectedMap: Map<K, V>) = expectedMap
 /**
  * A matcher that checks whether the expected set of entries are a subset of the actual map.
  *
- * values are compared using [com.taff.hephaestustest.Config.comparers]
+ * values are compared using [io.taff.hephaestustest.Config.comparers]
  * ```
  * mapOf(1 to 2) shouldNot beAMapOf(2 to 1)
  * ```
@@ -65,7 +65,7 @@ inline fun <K, V> beAMapOf(vararg expectedEntries: Pair<K, V>) = object : Matche
     /**
      * helper function for determining whether 2 values that could be different types (including matchers) match.
      *
-     *  values are compared using [com.taff.hephaestustest.Config.comparers]
+     *  values are compared using [io.taff.hephaestustest.Config.comparers]
      */
     private fun actualValueMatchesExpected(actual: Any, expected: Any?) = expected?.let { safeExpected ->
         try {

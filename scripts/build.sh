@@ -15,4 +15,4 @@ do
   esac
 done
 
-IS_RELEASE_BUILD=$IS_RELEASE_BUILD gradle clean test clean test artifactoryPublish artifactoryDeploy
+IS_RELEASE_BUILD=$IS_RELEASE_BUILD gradle clean test build artifactoryDeploy

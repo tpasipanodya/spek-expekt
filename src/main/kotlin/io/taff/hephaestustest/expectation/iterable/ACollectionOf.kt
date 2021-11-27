@@ -1,13 +1,13 @@
-package com.taff.hephaestustest.expectation.iterable
+package io.taff.hephaestustest.expectation.iterable
 
 import com.natpryce.hamkrest.MatchResult
 import com.natpryce.hamkrest.Matcher
-import com.taff.hephaestustest.Config
-import com.taff.hephaestustest.expectation._compare
+import io.taff.hephaestustest.Config
+import io.taff.hephaestustest.expectation._compare
 
 /**
  * Compares 2 collections, ignoring ordering. elements are compared using fuzzy matching logic defined in
- * [com.taff.hephaestustest.Config.compaprers] and recursively for nested matchers, e.g:
+ * [io.taff.hephaestustest.Config.compaprers] and recursively for nested matchers, e.g:
  * ```
  * setOf(1, 2) shouldNot beAnOrderedCollectionOf(1, 2, 3)
  * ```
@@ -44,7 +44,7 @@ inline fun <T> beAnUnOrderedCollectionOf(vararg expecteds: T) = object : Matcher
 
 /**
  * Compares 2 collections with strict ordering. elements are compared using fuzzy matching logic defined in
- * [com.taff.hephaestustest.Config.comparers] and recursively for nested matchers, e.g:
+ * [io.taff.hephaestustest.Config.comparers] and recursively for nested matchers, e.g:
  * ```
  * arrayOf(3, 2, 1) should beAnOrderedCollectionOf(3, 2, 1)
  * ```
