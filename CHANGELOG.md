@@ -6,7 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.2.0]
-Kotlin 1.6.0.g
+
+- Upgraded Java to v16 from v14
+- Changed group id to `io.taff` from `com.taff`
+- Setup CI and CD via GitHub Actions
+
+## [0.2.0]
+
+- Upgraded Kotlin to 1.6.0
 
 ## [0.1.0]
 
