@@ -10,7 +10,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - name: Setup Gradle
+      - name: Build & Deploy
         uses: gradle/gradle-build-action@v2
         env:
           ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
