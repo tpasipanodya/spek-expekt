@@ -1,4 +1,4 @@
-package io.taff.hephaestustest.expectation
+package io.taff.spek.expekt
 
 import com.natpryce.hamkrest.Matcher
 import com.natpryce.hamkrest.assertion.assertThat

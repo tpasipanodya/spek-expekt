@@ -1,1 +1,1 @@
-rootProject.name = "hephaestus-test"
+rootProject.name = "spek-expekt"

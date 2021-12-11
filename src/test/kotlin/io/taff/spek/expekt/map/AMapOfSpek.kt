@@ -1,8 +1,8 @@
-package io.taff.hephaestustest.expectation.map
+package io.taff.spek.expekt.map
 
-import io.taff.hephaestustest.expectation.iterable.beAnOrderedCollectionOf
-import io.taff.hephaestustest.expectation.should
-import io.taff.hephaestustest.expectation.shouldNot
+import io.taff.spek.expekt.iterable.beAnOrderedCollectionOf
+import io.taff.spek.expekt.should
+import io.taff.spek.expekt.shouldNot
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import java.math.BigDecimal

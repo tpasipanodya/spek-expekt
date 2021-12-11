@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "io.taff"
-version = "0.3.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
+version = "0.4.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
 java.sourceCompatibility = JavaVersion.VERSION_16
 
 repositories {
@@ -84,8 +84,8 @@ publishing {
 
 			pom {
 				name.set("project.name")
-				description.set("${project.name} $version - Lightweight test utilities for hephaestus projects")
-				url.set("https://github.com/tpasipanodya/hephaestus-test")
+				description.set("${project.name} $version - A collection of extensions and expectation matchers for spek2")
+				url.set("https://github.com/tpasipanodya/spek-expekt")
 
 				licenses {
 					license {
@@ -102,9 +102,9 @@ publishing {
 				}
 
 				scm {
-					connection.set("scm:git:git://github.com/tpasipanodya/hephaestus-test.git")
-					developerConnection.set("scm:git:ssh://github.com/tpasipanodya/hephaestus-test.git")
-					url.set("http://github.com/tpasipanodya/hephaestus-test/tree/main")
+					connection.set("scm:git:git://github.com/tpasipanodya/spek-expekt.git")
+					developerConnection.set("scm:git:ssh://github.com/tpasipanodya/spek-expekt.git")
+					url.set("http://github.com/tpasipanodya/spek-expekt/tree/main")
 				}
 			}
 		}

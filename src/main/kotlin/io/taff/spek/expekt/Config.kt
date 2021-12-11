@@ -1,12 +1,8 @@
-package io.taff.hephaestustest
+package io.taff.spek.expekt
 
 import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.databind.util.StdDateFormat
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import io.taff.hephaestustest.expectation.defaultComparers
 import mu.NamedKLogging
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -38,7 +34,7 @@ object Config {
     /**
      * Used for all logging.
      */
-    var logger = NamedKLogging("hephaestus-test").logger
+    var logger = NamedKLogging("spek-expekt").logger
 
     /**
      * Allows re-configuring/augmenting fuzzy matching rules. E.g, to add a new comparer:

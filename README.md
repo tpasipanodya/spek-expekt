@@ -1,48 +1,19 @@
-# Hephaestus Test #
+# Spek Expekt #
 
-A suite of utilities for testing [hephaestus](https://github.com/tpasipanodya/hephaestus-test) based projects. 
-Provides the following:
-- A [spek2](https://www.spekframework.org/) specification DSL for declaratively evaluating test expectations.
-- Declarative test matchers for arbitrarily comparing collections i.e, comparing lists & maps for logical equality 
-  instead of relying on `setOf(1) == listOf(1)`
-- App lifecycle management that boots up and tears down different layers of your hephaestus project between tests,
-  e.g starting up the web layer to run regression tests against the actual API and tearing it down when done.
+A collection of declarative, and composable expectation matchers for [Spek2](https://www.spekframework.org).
 
-## Download
+## How to use
 
 ```kotlin
-implementation("io.taff:hephaestus-test:0.3.0")
+implementation("io.taff:spek-expekt:0.4.0")
 ```
-#### Using Gradle
-
-## Use
-
-This library adheres to the principle of convention over configuration. Sane defaults are configured, but they are 
-also easily overridable. In general, this is a heavily configurable test orchestration library.
-
-## Setup
-
-```kotlin
-/**
- * You can directly manipulate the mutable configuration variables
- */
-Config.comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
-
-/**
- * Or use the functional API
- */
-val hephaestusTestConfig = configure {
-    comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
-}
-
-```
-
-Additional configuration details are discussed further [down here](Customising The Declarative Matchers)
 
 ### Using the Specification DSL 
 ```kotlin
-object AddSpek : Spek({
+data class Record(vararg values: Long)
 
+object AddSpek : Spek({
+    
     describe("demonstrating the DSL") {
         context("testing addition using the equalTo matcher") {
            it("adds") { 
@@ -76,10 +47,38 @@ object AddSpek : Spek({
           val map by memoized {
             mapOf(1 to 2, 2 to mapOf(3 to mapOf("foo" to "bar")))
           }
+            
           it("is a sub-map") {
             map should beAMapOf(mapOf(2 to mapOf(3 to beAMapOf("foo" to "bar"))))
             map shouldNot beAMapOf(mapOf(2 to mapOf(3 to beAMapOf("foo" to "lorem"))))
           }
+        }
+        
+        context("testing complex object graphs by composing matchers") {
+            val records by memoized { 
+                mapOf(
+                    "column1" to mapOf(
+                        "row1" to listOf(Record(2, 4, 6, 8), Record(16, 32, 64)),
+                        "row2" to Record(10)
+                    ),
+                    "column2" to listOf(
+                        mapOf("row1" to Record(3, 9, 15, 18))
+                    )
+                )
+            }
+
+            it("is a list of sub-list of a sub-map of") {
+                records should beAMapOf(
+                    "column1" to mapOf(
+                        "row1" to beAnOrderedCollectionOf(
+                            satisfy<Record> { values should beAnOrderedCollectionOf(2, 4, 6, 8) },
+                            satisfy<Record>{ 
+                                values should satisfy { all { this % 2 == 0 } }
+                            }
+                        )
+                    )
+                )
+            }
         }
     }
 })
@@ -88,23 +87,17 @@ object AddSpek : Spek({
 
 ## Customising The Declarative Matchers
 
-How the expected value for any given map entry or collection element is compared against the actual 
-value can be customized by setting your own comparers. For example, adding a custom 
-comparer for strings:
+This library adheres to the principle of convention over configuration. Sane defaults are configured, but they are
+also easily overridable.
 
 ```kotlin
-Config.comparers[String::class] = { expected: Any?, actual: Any? ->
-    expected == actual 
-}
+/** You can customize how comparisons are performed directly */
+Config.comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
 
-/* or */
-
-
+/** Or via the configure function */
 val hephaestusTestConfig = configure {
-  comparers[String::class] = { expected: Any?, actual: Any? ->
-    expected == actual
-  }
+    comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
 }
 ```
 
-Configured comparers apply to all collection/map matchers.
+Configured comparers will be applied to all implicit equals comparisons (e.g `beAnOrderedCollectionOf(2, 4, 6, 8)` implicitly compares ints).

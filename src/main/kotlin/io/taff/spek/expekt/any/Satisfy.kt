@@ -1,8 +1,7 @@
-package io.taff.hephaestustest.expectation.any
+package io.taff.spek.expekt.any
 
 import com.natpryce.hamkrest.MatchResult
 import com.natpryce.hamkrest.Matcher
-import com.natpryce.hamkrest.equalTo
 
 /**
  * Declaratively check whether the given predicate returns true, eg:

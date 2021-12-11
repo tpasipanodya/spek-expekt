@@ -1,11 +1,9 @@
-package io.taff.hephaestustest.expectation
+package io.taff.spek.expekt
 
-import io.taff.hephaestustest.Config
-import io.taff.hephaestustest.expectation.iterable.beAnOrderedCollectionOf
-import io.taff.hephaestustest.expectation.map.beAMapOf
+import io.taff.spek.expekt.iterable.beAnOrderedCollectionOf
+import io.taff.spek.expekt.map.beAMapOf
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.time.OffsetDateTime
 import java.time.temporal.ChronoUnit
 import java.time.temporal.Temporal
 

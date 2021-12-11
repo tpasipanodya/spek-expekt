@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.4.0
+
+- Renamed the project to `spek-expekt`
+- updated `README.md`
+- Added dependabot config
+
 ## 0.3.0
 
 - Upgraded Java to v16 from v14
