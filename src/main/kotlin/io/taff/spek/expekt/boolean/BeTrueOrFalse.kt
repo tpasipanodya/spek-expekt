@@ -1,6 +1,7 @@
-package io.taff.hephaestustest.expectation.boolean
+package io.taff.spek.expekt.boolean
 
-import io.taff.hephaestustest.expectation.any.satisfy
+import io.taff.spek.expekt.any.satisfy
+
 
 /**
  * Declaratively checks whether the actual value == true
