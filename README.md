@@ -1,6 +1,6 @@
 # Spek Expekt #
 
-A collection of declarative, and composable expectation matchers for [Spek2](https://www.spekframework.org).
+A collection of declarative and composable expectation matchers for [Spek2](https://www.spekframework.org).
 
 ## How to use
 
