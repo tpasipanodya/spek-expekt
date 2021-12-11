@@ -72,9 +72,7 @@ object AddSpek : Spek({
                     "column1" to mapOf(
                         "row1" to beAnOrderedCollectionOf(
                             satisfy<Record> { values should beAnOrderedCollectionOf(2, 4, 6, 8) },
-                            satisfy<Record>{ 
-                                values should satisfy { all { this % 2 == 0 } }
-                            }
+                            satisfy<Record> { values should satisfy { all { this % 2 == 0 } } }
                         )
                     )
                 )
