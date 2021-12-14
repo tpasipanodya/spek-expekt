@@ -12,8 +12,7 @@ implementation("io.taff:spek-expekt:0.4.0")
 ```kotlin
 data class Record(vararg values: Long)
 
-object AddSpek : Spek({
-    
+object MyFancySpeks : Spek({
     describe("demonstrating the DSL") {
         context("testing addition using the equalTo matcher") {
            it("adds") { 
@@ -72,7 +71,7 @@ object AddSpek : Spek({
                     "column1" to mapOf(
                         "row1" to beAnOrderedCollectionOf(
                             satisfy<Record> { values == arrayOf(2, 4, 6, 8) },
-                            satisfy<Record> { values.all { this % 2 == 0 } } }
+                            satisfy<Record> { values.all { this % 2 == 0 } }
                         )
                     )
                 )
@@ -93,7 +92,7 @@ also easily overridable.
 Config.comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
 
 /** Or via the configure function */
-val hephaestusTestConfig = configure {
+val spekExpektConfig = configure {
     comparers[MyFunkyType::class] = ::myFunkyComparisonFunction
 }
 ```
