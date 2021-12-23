@@ -1,6 +1,6 @@
 package io.taff.spek.expekt
 
-import io.taff.spek.expekt.iterable.beAnOrderedCollectionOf
+import io.taff.spek.expekt.iterable.containInOrder
 import io.taff.spek.expekt.map.beAMapOf
 import java.math.BigDecimal
 import java.math.BigInteger
@@ -174,7 +174,7 @@ fun _compare(expected: Any?, actual: Any?) : Boolean = expected?.let { safeExpec
                 if (actual is Iterable<*>) {
                     val expectedList = expected.toList()
                     val actualList = actual.toList()
-                    beAnOrderedCollectionOf(*expectedList.toTypedArray())
+                    containInOrder(*expectedList.toTypedArray())
                         .asPredicate()
                         .invoke(actualList) && actualList.size == expectedList.size
                 } else (expected == actual)

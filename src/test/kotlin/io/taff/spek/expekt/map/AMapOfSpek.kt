@@ -1,6 +1,6 @@
 package io.taff.spek.expekt.map
 
-import io.taff.spek.expekt.iterable.beAnOrderedCollectionOf
+import io.taff.spek.expekt.iterable.containInOrder
 import io.taff.spek.expekt.should
 import io.taff.spek.expekt.shouldNot
 import org.spekframework.spek2.Spek
@@ -82,7 +82,7 @@ object AMapOfSpek : Spek({
 
                     correctlyMatchesTheExpectedValue(
                         scenario = "1 level nesting with a collection matcher",
-                        expectedValue = beAMapOf(2 to beAnOrderedCollectionOf(3)),
+                        expectedValue = beAMapOf(2 to containInOrder(3)),
                         actualValue = mapOf(2 to listOf(3))
                     )
 
@@ -94,7 +94,7 @@ object AMapOfSpek : Spek({
 
                     correctlyMatchesTheExpectedValue(
                         scenario = "3 level nesting with a collection matcher and map matcher",
-                        expectedValue = beAMapOf("foo" to beAnOrderedCollectionOf(beAMapOf(2 to 3))),
+                        expectedValue = beAMapOf("foo" to containInOrder(beAMapOf(2 to 3))),
                         actualValue = mapOf("foo" to listOf(mapOf(2 to 3)))
                     )
                 }
@@ -148,7 +148,7 @@ object AMapOfSpek : Spek({
 
                     correctlyMismatchesTheExpectedValue(
                         scenario = "1 level nesting with a collection matcher",
-                        expectedValue = beAMapOf(2 to beAnOrderedCollectionOf(4)),
+                        expectedValue = beAMapOf(2 to containInOrder(4)),
                         actualValue = mapOf(2 to listOf(3))
                     )
 
@@ -160,7 +160,7 @@ object AMapOfSpek : Spek({
 
                     correctlyMismatchesTheExpectedValue(
                         scenario = "3 level nesting with a collection matcher and map matcher",
-                        expectedValue = beAMapOf("foo" to beAnOrderedCollectionOf(beAMapOf(2 to 4))),
+                        expectedValue = beAMapOf("foo" to containInOrder(beAMapOf(2 to 4))),
                         actualValue = mapOf("foo" to listOf(mapOf(2 to 3)))
                     )
                 }

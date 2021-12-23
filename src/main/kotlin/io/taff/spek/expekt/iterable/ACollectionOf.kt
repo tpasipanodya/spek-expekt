@@ -9,10 +9,10 @@ import io.taff.spek.expekt._compare
  * Compares 2 collections, ignoring ordering. elements are compared using fuzzy matching logic defined in
  * [io.taff.spek.expekt.Config.compaprers] and recursively for nested matchers, e.g:
  * ```
- * setOf(1, 2) shouldNot beAnOrderedCollectionOf(1, 2, 3)
- * ```
+ * setOf(1, 2) shouldNot containInOrder(1, 2, 3)
+ * ``
  */
-inline fun <T> beAnUnOrderedCollectionOf(vararg expecteds: T) = object : Matcher<Iterable<T>> {
+inline fun <T> containInAnyOrder(vararg expecteds: T) = object : Matcher<Iterable<T>> {
 
     override val description = "containing${Config.objectMapper.writeValueAsString(expecteds)}"
 
@@ -46,10 +46,10 @@ inline fun <T> beAnUnOrderedCollectionOf(vararg expecteds: T) = object : Matcher
  * Compares 2 collections with strict ordering. elements are compared using fuzzy matching logic defined in
  * [io.taff.spek.expekt.Config.comparers] and recursively for nested matchers, e.g:
  * ```
- * arrayOf(3, 2, 1) should beAnOrderedCollectionOf(3, 2, 1)
+ * arrayOf(3, 2, 1) should containInOrder(3, 2, 1)
  * ```
  */
-inline fun <T> beAnOrderedCollectionOf(vararg expecteds: T) = object : Matcher<Iterable<T>> {
+inline fun <T> containInOrder(vararg expecteds: T) = object : Matcher<Iterable<T>> {
 
     override val description = "containingInOrder${Config.objectMapper.writeValueAsString(expecteds)}"
 
