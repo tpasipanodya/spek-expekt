@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.6.0
 - `kotlin-logging-jvm` version `2.1.21`
-- Added `matchCollection`
+- Renamed `beAnOrderedCollectionOf` to `containInOrder`
+- Renamed `beAnUnorderedCollectionOf` to `containInAnyOrder`
 
 ## 0.5.0
 
