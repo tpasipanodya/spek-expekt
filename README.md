@@ -28,17 +28,17 @@ object MyFancySpeks : Spek({
            }
         }
         
-        context("testing for subsets using the beAnUnOrderedCollectionOf matcher") {
+        context("testing for subsets using the containInAnyOrder matcher") {
             it("is a subset") { 
-              setOf(1, 3, 2) should beAnUnOrderedCollectionOf(2, 1)
-              setOf(1, 3, 2) shouldNot beAnUnOrderedCollectionOf(7, 1)
+              setOf(1, 3, 2) should containInAnyOrder(2, 1)
+              setOf(1, 3, 2) shouldNot containInAnyOrder(7, 1)
             }
         }
 
-        context("testing for sublists using the beAnOrderedCollectionOf matcher") {
+        context("testing for sublists using the containInOrder matcher") {
           it("is a sublist") { 
-            listOf(1, 2, 3) should beAnOrderedCollectionOf(1, 2)
-            listOf(3, 2, 1) shouldNot beAnOrderedCollectionOf(1, 2)
+            listOf(1, 2, 3) should containInOrder(1, 2)
+            listOf(3, 2, 1) shouldNot containInOrder(1, 2)
           }
         }
 
@@ -61,18 +61,21 @@ object MyFancySpeks : Spek({
                         "row2" to Record(10)
                     ),
                     "column2" to listOf(
-                        mapOf("row1" to Record(3, 9, 15, 18))
+                        mutableMapOf("row1" to Record(3, 9, 15, 18))
                     )
                 )
             }
 
-            it("is a list of sub-list of a sub-map of") {
+            it("is a list of sub-map of a sub-map of") {
                 records should beAMapOf(
-                    "column1" to mapOf(
-                        "row1" to beAnOrderedCollectionOf(
+                    "column1" to beAMapOf(
+                        "row1" to containInOrder(
                             satisfy<Record> { values == arrayOf(2, 4, 6, 8) },
                             satisfy<Record> { values.all { this % 2 == 0 } }
                         )
+                    ),
+                    "column2" to containInAnyOrder(
+                        beAMapOf("row1" to Record(3, 9, 15, 18))
                     )
                 )
             }
@@ -97,4 +100,4 @@ val spekExpektConfig = configure {
 }
 ```
 
-Configured comparers will be applied to all implicit equals comparisons (e.g `beAnOrderedCollectionOf(2, 4, 6, 8)` implicitly compares ints).
+Configured comparers will be applied to all implicit equals comparisons (e.g `containInOrder(2, 4, 6, 8)` implicitly compares ints).

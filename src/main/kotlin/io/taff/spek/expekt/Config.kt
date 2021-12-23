@@ -24,7 +24,7 @@ object Config {
      * Used for deserializing dates. When dates are represented as strings (e.g after a partially complete json eserialization),
      * we use this to attempt deserializing strings to dates for comparison. e.g,assuming today is 2021/10/10:
      * expect(listOf(OffsetDateTime.now()) {
-     *    toBeAnOrderedCollectionOf("2021/10/10")
+     *    containInOrder("2021/10/10")
      * }
      */
     var dateTimeDeserializer: (String) -> OffsetDateTime = { str: String ->
