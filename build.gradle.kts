@@ -13,7 +13,7 @@ plugins {
 
 group = "io.taff"
 version = "0.6.1${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
-java.sourceCompatibility = JavaVersion.VERSION_16
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
