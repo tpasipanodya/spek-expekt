@@ -1,5 +1,5 @@
 # Spek Expekt #
-![Build](https://github.com/tpasipanodya/spek-expekt/actions/workflows/.github/workflows/release.yaml/badge.svg)
+![CI](https://github.com/tpasipanodya/spek-expekt/actions/workflows/.github/workflows/release.yml/badge.svg)
 
 A collection of declarative and composable expectation matchers for [Spek2](https://www.spekframework.org).
 
