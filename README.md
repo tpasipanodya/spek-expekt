@@ -6,7 +6,7 @@ A collection of declarative and composable expectation matchers for [Spek2](http
 ## How to use
 
 ```kotlin
-implementation("io.taff:spek-expekt:0.4.0")
+implementation("io.taff:spek-expekt:0.6.2")
 ```
 
 ### Using the Specification DSL 
