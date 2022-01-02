@@ -12,8 +12,8 @@ plugins {
 }
 
 group = "io.taff"
-version = "0.6.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
-java.sourceCompatibility = JavaVersion.VERSION_16
+version = "0.6.1${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
@@ -51,7 +51,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "16"
+		jvmTarget = "17"
 	}
 }
 
@@ -115,19 +115,16 @@ artifactory {
 	setContextUrl("https://tmpasipanodya.jfrog.io/artifactory/")
 
 	publish(delegateClosureOf<PublisherConfig> {
-
 		repository(delegateClosureOf<GroovyObject> {
 			setProperty("repoKey", if (isReleaseBuild()) "releases" else "snapshots")
 			setProperty("username", System.getenv("ARTIFACTORY_USER"))
 			setProperty("password", System.getenv("ARTIFACTORY_PASSWORD"))
 			setProperty("maven", true)
 		})
-
 		defaults(delegateClosureOf<GroovyObject> {
 			invokeMethod("publications", "mavenJava")
 		})
 	})
-
 	resolve(delegateClosureOf<ResolverConfig> {
 		setProperty("repoKey", if (isReleaseBuild()) "releases" else "snapshots")
 	})
