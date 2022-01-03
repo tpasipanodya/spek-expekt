@@ -1,12 +1,12 @@
 # Spek Expekt #
 ![CI](https://github.com/tpasipanodya/spek-expekt/actions/workflows/.github/workflows/cicd.yml/badge.svg)
 
-A collection of declarative and composable expectation matchers for [Spek2](https://www.spekframework.org).
+A collection of declarative, configurable and composable matchers for [Spek2](https://www.spekframework.org).
 
 ## How to use
 
 ```kotlin
-implementation("io.taff:spek-expekt:0.6.2")
+implementation("io.taff:spek-expekt:0.6.3")
 ```
 
 ### Using the Specification DSL 
@@ -101,4 +101,7 @@ val spekExpektConfig = configure {
 }
 ```
 
-Configured comparers will be applied to all implicit equals comparisons (e.g `containInOrder(2, 4, 6, 8)` implicitly compares ints).
+Configured comparers will be applied to all implicit equals comparisons (e.g `containInOrder(2, 4, 6, 8)` implicitly compares integers). Using this as an example, you can customize how integer comparison will be perfomed as follows:
+```kotlin
+Config.comparers[Int::class] = { expected, actual -> expected.compareTo(actual) == 0 }
+```
