@@ -2,6 +2,7 @@ package io.taff.spek.expekt
 
 import java.math.BigDecimal
 import java.math.BigInteger
+import java.time.Instant
 import java.time.OffsetDateTime
 import kotlin.reflect.KClass
 
@@ -28,5 +29,7 @@ internal val defaultComparers = mutableMapOf<KClass<*>, (Any?, Any?) -> Boolean>
 
     Enum::class to ::compareComparables,
 
-    OffsetDateTime::class to ::compareDateTimes
+    OffsetDateTime::class to ::compareTemporals,
+
+    Instant::class to ::compareTemporals
 )

@@ -1,7 +1,7 @@
 package io.taff.spek.expekt
 
 import io.taff.spek.expekt.iterable.containInOrder
-import io.taff.spek.expekt.map.beAMapOf
+import io.taff.spek.expekt.map.contain
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.time.temporal.ChronoUnit
@@ -149,7 +149,7 @@ internal fun compareBigDecimals(expected: Any?, actual: Any?) = when(expected) {
 /**
  * Compare other items against OffsetDateTime
  */
-internal fun compareDateTimes(expected: Any?, actual: Any?) = if (actual is String) {
+internal fun compareTemporals(expected: Any?, actual: Any?) = if (actual is String) {
     when (expected) {
         is Temporal -> ChronoUnit.MILLIS.between(Config.dateTimeDeserializer(actual), expected) == 0L
 
@@ -184,7 +184,7 @@ fun _compare(expected: Any?, actual: Any?) : Boolean = expected?.let { safeExpec
                 if (actual is Map<*, *>) {
                     val expectedEntries = expected.map { it.toPair() }.toTypedArray()
                     val actualMap = actual as Map<Any?, *>
-                    beAMapOf(*expectedEntries)
+                    contain(*expectedEntries)
                         .asPredicate()
                         .invoke(actualMap) && actualMap.size == expected.size
                 } else (expected == actual)

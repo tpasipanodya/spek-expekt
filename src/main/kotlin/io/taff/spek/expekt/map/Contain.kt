@@ -11,24 +11,24 @@ import java.lang.IllegalArgumentException
  *
  * values are compared using [io.taff.spek.expekt.Config.comparers]
  * ```
- * mapOf(1 to 2) should beAMapOf(mapOf(1 to 2))
+ * mapOf(1 to 2) should contain(mapOf(1 to 2))
  * ```
  */
-inline fun <K, V> beAMapOf(expectedMap: Map<K, V>) = expectedMap
+inline fun <K, V> contain(expectedMap: Map<K, V>) = expectedMap
     .entries
     .map { it.toPair() }
     .toTypedArray()
-    .let { beAMapOf(*it) }
+    .let { contain(*it) }
 
 /**
  * A matcher that checks whether the expected set of entries are a subset of the actual map.
  *
  * values are compared using [io.taff.spek.expekt.Config.comparers]
  * ```
- * mapOf(1 to 2) shouldNot beAMapOf(2 to 1)
+ * mapOf(1 to 2) shouldNot contain(2 to 1)
  * ```
  */
-inline fun <K, V> beAMapOf(vararg expectedEntries: Pair<K, V>) = object : Matcher<Map<K, V>> {
+inline fun <K, V> contain(vararg expectedEntries: Pair<K, V>) = object : Matcher<Map<K, V>> {
 
     private val serializedEntries by lazy {
         """{${
