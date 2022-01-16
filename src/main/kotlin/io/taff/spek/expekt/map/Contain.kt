@@ -58,7 +58,7 @@ inline fun <K, V> contain(vararg expectedEntries: Pair<K, V>) = object : Matcher
                     }
                 }
             } else {
-                MatchResult.Mismatch("actualMap: $actualMap\n problematic entry: {${nonMatchingEntry.first}: ${nonMatchingEntry.second}}")
+                MatchResult.Mismatch("actual: $actualMap\n problematic entry: {${nonMatchingEntry.first}: ${nonMatchingEntry.second}}")
             }
         }
 
