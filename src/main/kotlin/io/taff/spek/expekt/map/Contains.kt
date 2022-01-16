@@ -30,12 +30,9 @@ inline fun <K, V> contain(expectedMap: Map<K, V>) = expectedMap
  */
 inline fun <K, V> contain(vararg expectedEntries: Pair<K, V>) = object : Matcher<Map<K, V>> {
 
-    private val serializedEntries by lazy {
-        """${
-            expectedEntries.joinToString {
-                "\n\t\"${it.first}\": ${it.second}"
-            }
-        }""".trimIndent()
+    private val serializedEntries by lazy { expectedEntries
+            .joinToString { "\n\t${it.first} to ${it.second}" }
+            .trimIndent()
     }
 
     override val description = "contains($serializedEntries)"
@@ -51,14 +48,10 @@ inline fun <K, V> contain(vararg expectedEntries: Pair<K, V>) = object : Matcher
         }.let { nonMatchingEntry ->
             if (nonMatchingEntry == null) {
                 MatchResult.Match.also {
-                    Config.logger.info {
-                        "Success! Json object contained attributes {${
-                            expectedEntries.joinToString { "\n\t\"${it.first}\": ${it.second}" }
-                        }\n}"
-                    }
+                    Config.logger.info { "Success! Matcher: $description" }
                 }
             } else {
-                MatchResult.Mismatch("actual: $actualMap\n problematic entry: {${nonMatchingEntry.first}: ${nonMatchingEntry.second}}")
+                MatchResult.Mismatch("actual: $actualMap\n problematic entry: {${nonMatchingEntry.first} to ${nonMatchingEntry.second}}")
             }
         }
 
