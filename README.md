@@ -101,7 +101,8 @@ val spekExpektConfig = configure {
 }
 ```
 
-Configured comparers will be applied to all implicit equals comparisons (e.g `containInOrder(2, 4, 6, 8)` implicitly compares integers). Using this as an example, you can customize how integer comparison will be perfomed as follows:
+Configured comparers will be applied to all implicit equals comparisons (e.g `containInOrder(2, 4, 6, 8)` implicitly 
+compares integers). Using this as an example, you can customize how integer comparison will be perfomed as follows:
 ```kotlin
 Config.comparers[Int::class] = { expected, actual -> expected.compareTo(actual) == 0 }
 ```

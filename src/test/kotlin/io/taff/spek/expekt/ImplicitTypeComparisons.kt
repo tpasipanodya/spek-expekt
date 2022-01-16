@@ -259,17 +259,17 @@ object ImplicitTypeComparisons : Spek({
                     expected,
                     listOf(
                         expected,
-//                        expected.toInstant(),
-//                        expected.toLocalDate(),
-//                        expected.toLocalDateTime(),
-//                        expected.toOffsetDateTime()
+                        expected.toInstant(),
+                        expected.toLocalDate(),
+                        expected.toLocalDateTime(),
+                        expected.toOffsetDateTime()
                     ),
                     listOf(
-//                        misMatchingInstant,
-//                        misMatchingInstant.toInstant(),
-//                        misMatchingInstant.toLocalDate(),
-//                        misMatchingInstant.toLocalDateTime(),
-//                        misMatchingInstant.toOffsetDateTime()
+                        misMatchingInstant,
+                        misMatchingInstant.toInstant(),
+                        misMatchingInstant.toLocalDate(),
+                        misMatchingInstant.toLocalDateTime(),
+                        misMatchingInstant.toOffsetDateTime()
                     )
                 )
             }
