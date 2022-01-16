@@ -31,7 +31,7 @@ inline fun <K, V> contain(expectedMap: Map<K, V>) = expectedMap
 inline fun <K, V> contain(vararg expectedEntries: Pair<K, V>) = object : Matcher<Map<K, V>> {
 
     private val serializedEntries by lazy { expectedEntries
-            .joinToString { "\n\t${it.first} to ${it.second}" }
+            .joinToString { "\n\t${it.first} = ${it.second}" }
             .trimIndent()
     }
 
@@ -51,7 +51,7 @@ inline fun <K, V> contain(vararg expectedEntries: Pair<K, V>) = object : Matcher
                     Config.logger.info { "Success! Matcher: $description" }
                 }
             } else {
-                MatchResult.Mismatch("actual: $actualMap\n problematic entry: {${nonMatchingEntry.first} to ${nonMatchingEntry.second}}")
+                MatchResult.Mismatch("actual: $actualMap\n problematic entry: {${nonMatchingEntry.first} = ${nonMatchingEntry.second}}")
             }
         }
 

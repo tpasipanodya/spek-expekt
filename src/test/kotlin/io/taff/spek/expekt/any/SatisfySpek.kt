@@ -5,7 +5,7 @@ import io.taff.spek.expekt.shouldNot
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
-object SatisfiesSpek : Spek({
+object SatisfySpek : Spek({
     describe(".satsifies") {
         it("correctly asserts") {
             true should satisfy { this }

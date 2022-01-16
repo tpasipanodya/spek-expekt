@@ -5,7 +5,7 @@ import io.taff.spek.expekt.shouldNot
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
-object ACollectionOfSpek : Spek({
+object ContainsSpek : Spek({
 
     val actual by memoized { listOf(1, 2) }
     val expected by memoized { listOf(1, 2) }

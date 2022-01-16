@@ -19,28 +19,28 @@ internal fun compareComparables(expected: Any?, actual: Any?) = if (actual is Co
 /** Compare other numbers against integers */
 internal fun compareInts(expected: Any?, actual: Any?) = when(expected) {
     is Int -> when(actual) {
-        is Int ->  expected.compareTo(actual) == 0
-        is Long -> expected.compareTo(actual) == 0
-        is Float  -> expected.compareTo(actual) == 0
-        is Double -> expected.compareTo(actual) == 0
-        is BigInteger -> BigInteger.valueOf(expected.toLong()).compareTo(actual) == 0
-        is BigDecimal -> BigDecimal.valueOf(expected.toLong()).compareTo(actual) == 0
+        is Int ->  expected.compareTo(actual)
+        is Long -> expected.compareTo(actual)
+        is Float  -> expected.compareTo(actual)
+        is Double -> expected.compareTo(actual)
+        is BigInteger -> BigInteger.valueOf(expected.toLong()).compareTo(actual)
+        is BigDecimal -> BigDecimal.valueOf(expected.toLong()).compareTo(actual)
         else -> false
-    }
+    } == 0
     else -> expected == actual
 }
 
 /** Compare other numbers against longs */
 internal fun compareLongs(expected: Any?, actual: Any?) = when(expected) {
     is Long -> when(actual) {
-        is Int ->  expected.compareTo(actual) == 0
-        is Long -> expected.compareTo(actual) == 0
-        is Float  -> expected.compareTo(actual) == 0
-        is Double -> expected.compareTo(actual) == 0
-        is BigInteger -> BigInteger.valueOf(expected).compareTo(actual) == 0
-        is BigDecimal -> BigDecimal.valueOf(expected).compareTo(actual) == 0
+        is Int ->  expected.compareTo(actual)
+        is Long -> expected.compareTo(actual)
+        is Float  -> expected.compareTo(actual)
+        is Double -> expected.compareTo(actual)
+        is BigInteger -> BigInteger.valueOf(expected).compareTo(actual)
+        is BigDecimal -> BigDecimal.valueOf(expected).compareTo(actual)
         else -> false
-    }
+    } == 0
     else -> expected == actual
 }
 
@@ -144,13 +144,13 @@ internal fun compareLocalDateTimes(expected: Any?, actual: Any?) = when (expecte
 /** Compare other temporal types against OffsetDateTimes */
 internal fun compareOffsetDateTimes(expected: Any?, actual: Any?) = when (expected) {
     is OffsetDateTime -> when(actual) {
-        is OffsetDateTime -> expected.compareTo(actual) == 0
-        is Instant -> expected.compareTo(actual.atOffset(expected.offset)) == 0
-        is ZonedDateTime -> expected.atZoneSameInstant(actual.zone).compareTo(actual) == 0
-        is LocalDate -> expected.toLocalDate().compareTo(actual) == 0
-        is LocalDateTime -> expected.compareTo(actual.atOffset(expected.offset)) == 0
+        is OffsetDateTime -> expected.compareTo(actual)
+        is Instant -> expected.compareTo(actual.atOffset(expected.offset))
+        is ZonedDateTime -> expected.atZoneSameInstant(actual.zone).compareTo(actual)
+        is LocalDate -> expected.toLocalDate().compareTo(actual)
+        is LocalDateTime -> expected.compareTo(actual.atOffset(expected.offset))
         else -> expected == actual
-    }
+    } == 0
     else -> false
 }
 

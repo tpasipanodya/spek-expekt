@@ -10,7 +10,7 @@ import java.math.BigInteger
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-object AMapOfSpek : Spek({
+object ContainsSpek : Spek({
 
     describe(".invoke") {
         fun correctlyMatchesTheExpectedValue(scenario: String, expectedValue: Any?, actualValue: Any?) =
@@ -175,28 +175,12 @@ object AMapOfSpek : Spek({
                     actualValue ="hello"
                 )
 
-                OffsetDateTime.now().let { now ->
-                    correctlyMatchesTheExpectedValue(
-                        scenario = "matching dates encoded as Strings",
-                        expectedValue = now,
-                        actualValue = now.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-                    )
-                }
-
                 context("nested maps") {
                     correctlyMatchesTheExpectedValue(
                         scenario = "matching strings",
                         expectedValue = contain("hello" to "world"),
                         actualValue = mapOf("hello" to "world")
                     )
-
-                    OffsetDateTime.now().let { now ->
-                        correctlyMatchesTheExpectedValue(
-                            scenario = "matching dates encoded as Strings",
-                            expectedValue = contain("hello" to now),
-                            actualValue = mapOf("hello" to now.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)),
-                        )
-                    }
                 }
             }
 

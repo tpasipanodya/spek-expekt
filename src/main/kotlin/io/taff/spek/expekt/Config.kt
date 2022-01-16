@@ -1,24 +1,11 @@
 package io.taff.spek.expekt
 
 import mu.NamedKLogging
-import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
 
 /**
  * Configuration used throughout this library.
  */
 object Config {
-
-    /**
-     * Used for deserializing dates. When dates are represented as strings (e.g after a partially complete json eserialization),
-     * we use this to attempt deserializing strings to dates for comparison. e.g,assuming today is 2021/10/10:
-     * expect(listOf(OffsetDateTime.now()) {
-     *    containInOrder("2021/10/10")
-     * }
-     */
-    var dateTimeDeserializer: (String) -> OffsetDateTime = { str: String ->
-        OffsetDateTime.parse(str, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-    }
 
     /**
      * Used for all logging.
@@ -38,6 +25,4 @@ object Config {
 /**
  * Configure this library.
  */
-fun configure(fxn: Config.()-> Unit) {
-    fxn(Config)
-}
+fun configure(fxn: Config.()-> Unit) { fxn(Config) }
