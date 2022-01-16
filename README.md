@@ -6,7 +6,7 @@ A collection of declarative, configurable and composable matchers for [Spek2](ht
 ## How to use
 
 ```kotlin
-implementation("io.taff:spek-expekt:0.6.3")
+implementation("io.taff:spek-expekt:0.6.4")
 ```
 
 ### Using the Specification DSL 
@@ -43,14 +43,14 @@ object MyFancySpeks : Spek({
           }
         }
 
-        context("comparing maps using the beAMapOf matcher") {
+        context("comparing maps using the contain matcher") {
           val map by memoized {
             mapOf(1 to 2, 2 to mapOf(3 to mapOf("foo" to "bar")))
           }
             
           it("is a sub-map") {
-            map should beAMapOf(mapOf(2 to mapOf(3 to beAMapOf("foo" to "bar"))))
-            map shouldNot beAMapOf(mapOf(2 to mapOf(3 to beAMapOf("foo" to "lorem"))))
+            map should contain(mapOf(2 to mapOf(3 to contain("foo" to "bar"))))
+            map shouldNot contain(mapOf(2 to mapOf(3 to contain("foo" to "lorem"))))
           }
         }
         
@@ -68,15 +68,15 @@ object MyFancySpeks : Spek({
             }
 
             it("is a list of sub-map of a sub-map of") {
-                records should beAMapOf(
-                    "column1" to beAMapOf(
+                records should contain(
+                    "column1" to contain(
                         "row1" to containInOrder(
                             satisfy<Record> { values == arrayOf(2, 4, 6, 8) },
                             satisfy<Record> { values.all { this % 2 == 0 } }
                         )
                     ),
                     "column2" to containInAnyOrder(
-                        beAMapOf("row1" to Record(3, 9, 15, 18))
+                        contain("row1" to Record(3, 9, 15, 18))
                     )
                 )
             }
@@ -101,7 +101,8 @@ val spekExpektConfig = configure {
 }
 ```
 
-Configured comparers will be applied to all implicit equals comparisons (e.g `containInOrder(2, 4, 6, 8)` implicitly compares integers). Using this as an example, you can customize how integer comparison will be perfomed as follows:
+Configured comparers will be applied to all implicit equals comparisons (e.g `containInOrder(2, 4, 6, 8)` implicitly 
+compares integers). Using this as an example, you can customize how integer comparison will be perfomed as follows:
 ```kotlin
 Config.comparers[Int::class] = { expected, actual -> expected.compareTo(actual) == 0 }
 ```
