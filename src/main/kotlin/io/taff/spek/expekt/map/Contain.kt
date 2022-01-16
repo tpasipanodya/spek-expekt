@@ -31,14 +31,14 @@ inline fun <K, V> contain(expectedMap: Map<K, V>) = expectedMap
 inline fun <K, V> contain(vararg expectedEntries: Pair<K, V>) = object : Matcher<Map<K, V>> {
 
     private val serializedEntries by lazy {
-        """{${
+        """${
             expectedEntries.joinToString {
                 "\n\t\"${it.first}\": ${it.second}"
             }
-        }}""".trimIndent()
+        }""".trimIndent()
     }
 
-    override val description = serializedEntries
+    override val description = "contains($serializedEntries)"
 
     /**
      * Compare the actual map against the expected map.

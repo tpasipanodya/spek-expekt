@@ -14,7 +14,7 @@ import io.taff.spek.expekt._compare
  */
 inline fun <T> containInAnyOrder(vararg expecteds: T) = object : Matcher<Iterable<T>> {
 
-    override val description = "containsInAnyOrder${Config.objectMapper.writeValueAsString(expecteds)}"
+    override val description = "containInAnyOrder${Config.objectMapper.writeValueAsString(expecteds)}"
 
     override fun invoke(actuals: Iterable<T>) = actuals!!.toList().let { actualList ->
         expecteds.all { expected->
@@ -51,7 +51,7 @@ inline fun <T> containInAnyOrder(vararg expecteds: T) = object : Matcher<Iterabl
  */
 inline fun <T> containInOrder(vararg expecteds: T) = object : Matcher<Iterable<T>> {
 
-    override val description = "containsInOrder${Config.objectMapper.writeValueAsString(expecteds)}"
+    override val description = "containInOrder${Config.objectMapper.writeValueAsString(expecteds)}"
 
     override fun invoke(actuals: Iterable<T>) = actuals.toList().let { actualList ->
         expecteds.mapIndexed { index, expected ->
