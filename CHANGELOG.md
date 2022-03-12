@@ -5,17 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.7.1
-- `com.jfrog.artifactory` version `4.27.1`.
-- `guava` version `31.1-jre`.
--  `spek-dsl-jvm` version `2.0.18`.
-- `spek-runner-junit5` version `2.0.18`.
-
-## 0.7.0
+## 0.7.2
 - Additional test coverage for implicit type-based value comparisons.
 - Added implicit type-based value comparisons for Temporal types.
 - Removed unused `offsetDatetimeFormatter` from config.
 - Removed `objectMapper` from config since it's no longer needed for logging purposes.
+- `com.jfrog.artifactory` version `4.27.1`.
+- `guava` version `31.1-jre`.
+-  `spek-dsl-jvm` version `2.0.18`.
+- `spek-runner-junit5` version `2.0.18`.
 
 ## 0.6.3
 - `com.jfrog.artifactory` version `4.25.5`
