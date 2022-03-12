@@ -39,7 +39,7 @@ dependencies {
 	runtimeOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	api("io.github.microutils:kotlin-logging-jvm:2.1.21")
 	api("com.natpryce:hamkrest:1.8.0.1")
-	api("com.google.guava:guava:31.0.1-jre")
+	api("com.google.guava:guava:31.1-jre")
 	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
 	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.1")
 	api("org.junit.jupiter:junit-jupiter")
