@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.7.3
+- `jackson-datatype-jsr310` version `2.13.3`
+- `jackson-module-kotlin` version `2.13.3`
+- `jvm` version `1.6.21`
+
 ## 0.7.2
 - Additional test coverage for implicit type-based value comparisons.
 - Added implicit type-based value comparisons for Temporal types.
