@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.7.4
 
+- `jvm` version `0.7.5`
+
+## 0.7.4
+
 - `kotlin-logging-jvm` version `2.1.23`
 - `jvm` plugin version `1.7.0`
 
