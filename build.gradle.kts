@@ -45,7 +45,7 @@ dependencies {
 	api("org.junit.jupiter:junit-jupiter")
 	implementation(enforcedPlatform("org.junit:junit-bom:5.8.2"))
 	api("org.spekframework.spek2:spek-dsl-jvm:2.0.18")
-	api("org.spekframework.spek2:spek-runner-junit5:2.0.18")
+	api("org.spekframework.spek2:spek-runner-junit5:2.0.19")
 }
 
 tasks.withType<KotlinCompile> {
