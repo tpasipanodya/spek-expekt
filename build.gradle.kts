@@ -6,7 +6,7 @@ import groovy.lang.GroovyObject
 plugins {
 	kotlin("jvm") version "1.7.10"
 	id("org.jetbrains.dokka") version "1.7.10"
-	id("com.jfrog.artifactory") version "4.28.4"
+	id("com.jfrog.artifactory") version "4.30.1"
 	id("maven-publish")
 	idea
 }
@@ -43,7 +43,7 @@ dependencies {
 	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
 	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3")
 	api("org.junit.jupiter:junit-jupiter")
-	implementation(enforcedPlatform("org.junit:junit-bom:5.8.2"))
+	implementation(enforcedPlatform("org.junit:junit-bom:5.9.1"))
 	api("org.spekframework.spek2:spek-dsl-jvm:2.0.18")
 	api("org.spekframework.spek2:spek-runner-junit5:2.0.19")
 }
