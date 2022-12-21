@@ -12,8 +12,8 @@ plugins {
 }
 
 group = "io.taff"
-version = "0.8.1${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
-java.sourceCompatibility = JavaVersion.VERSION_19
+version = "0.9.0${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
+java.sourceCompatibility = JavaVersion.VERSION_18
 
 repositories {
 	mavenCentral()
