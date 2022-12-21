@@ -4,7 +4,6 @@
 A collection of declarative, configurable and composable matchers for [Spek2](https://www.spekframework.org).
 
 ## How to use
-
 ```kotlin
 implementation("io.taff:spek-expekt:0.9.0")
 ```
