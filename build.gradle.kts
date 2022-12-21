@@ -37,7 +37,7 @@ configurations {
 dependencies {
 	runtimeOnly("org.jetbrains.kotlin:kotlin-reflect")
 	runtimeOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	api("io.github.microutils:kotlin-logging-jvm:2.1.23")
+	api("io.github.microutils:kotlin-logging-jvm:3.0.4")
 	api("com.natpryce:hamkrest:1.8.0.1")
 	api("com.google.guava:guava:31.1-jre")
 	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.1")
