@@ -5,7 +5,7 @@ A collection of declarative, configurable and composable matchers for [Spek2](ht
 
 ## How to use
 ```kotlin
-implementation("io.taff:spek-expekt:0.9.0")
+implementation("io.taff:spek-expekt:0.10.0")
 ```
 
 ### Using the Specification DSL 
