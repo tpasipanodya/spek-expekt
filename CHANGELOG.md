@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.9.0
 
+- `jvm` version `1.8.21`
+- `jackson-datatype-jsr310` & `jackson-module-kotlin` version `2.15.1`
+- `junit-bom` version `5.9.3`
+
+## 0.9.0
+
 - `jdk` version `18`
 
 ## 0.8.1
