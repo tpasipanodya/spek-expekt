@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.9.0
+## 0.10.1
+
+- Bumped JVM compatibility to JDK 18
+
+## 0.10.0
 
 - `jvm` version `1.8.21`
 - `jackson-datatype-jsr310` & `jackson-module-kotlin` version `2.15.1`
