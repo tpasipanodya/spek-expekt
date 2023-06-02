@@ -16,7 +16,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          java-version: 18
+          java-version: 19
       - name: Build & Deploy
         uses: gradle/gradle-build-action@v2
         env:
@@ -24,7 +24,7 @@ jobs:
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
           IS_RELEASE_BUILD: true
         with:
-          gradle-version: 7.6
+          gradle-version: 8.1.1
           arguments: clean test build artifactoryPublish
       - name: Upload Test Results
         uses: dorny/test-reporter@v1.6.0
