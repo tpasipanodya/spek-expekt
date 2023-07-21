@@ -18,14 +18,6 @@ java.sourceCompatibility = JavaVersion.VERSION_19
 repositories {
 	mavenCentral()
 	maven("https://jitpack.io")
-	maven {
-		name = "JFrog"
-		url = uri("https://tmpasipanodya.jfrog.io/artifactory/releases")
-		credentials {
-			username = System.getenv("ARTIFACTORY_USER")
-			password = System.getenv("ARTIFACTORY_PASSWORD")
-		}
-	}
 }
 
 configurations {
@@ -75,6 +67,16 @@ tasks.withType<GenerateModuleMetadata> {
 }
 
 publishing {
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/tmpasipanodya/spek-expekt")
+			credentials {
+				username = System.getenv("GITHUB_ACTOR")
+				password = System.getenv("GITHUB_TOKEN")
+			}
+		}
+	}
 	publications {
 		create<MavenPublication>("mavenJava") {
 
