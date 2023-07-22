@@ -1,31 +1,19 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig
-import org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig
-import groovy.lang.GroovyObject
 
 plugins {
-	kotlin("jvm") version "1.8.22"
-	id("org.jetbrains.dokka") version "1.8.10"
-	id("com.jfrog.artifactory") version "4.32.0"
+	kotlin("jvm") version "1.9.0"
+	id("org.jetbrains.dokka") version "1.8.20"
 	id("maven-publish")
 	idea
 }
 
 group = "io.taff"
-version = "0.10.1${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
-java.sourceCompatibility = JavaVersion.VERSION_19
+version = "0.10.2${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
+java.sourceCompatibility = JavaVersion.VERSION_20
 
 repositories {
 	mavenCentral()
 	maven("https://jitpack.io")
-	maven {
-		name = "JFrog"
-		url = uri("https://tmpasipanodya.jfrog.io/artifactory/releases")
-		credentials {
-			username = System.getenv("ARTIFACTORY_USER")
-			password = System.getenv("ARTIFACTORY_PASSWORD")
-		}
-	}
 }
 
 configurations {
@@ -51,7 +39,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "19"
+		jvmTarget = "20"
 	}
 }
 
@@ -75,6 +63,16 @@ tasks.withType<GenerateModuleMetadata> {
 }
 
 publishing {
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/tpasipanodya/spek-expekt")
+			credentials {
+				username = System.getenv("GITHUB_ACTOR")
+				password = System.getenv("GITHUB_TOKEN")
+			}
+		}
+	}
 	publications {
 		create<MavenPublication>("mavenJava") {
 
@@ -109,25 +107,6 @@ publishing {
 			}
 		}
 	}
-}
-
-artifactory {
-	setContextUrl("https://tmpasipanodya.jfrog.io/artifactory/")
-
-	publish(delegateClosureOf<PublisherConfig> {
-		repository(delegateClosureOf<GroovyObject> {
-			setProperty("repoKey", if (isReleaseBuild()) "releases" else "snapshots")
-			setProperty("username", System.getenv("ARTIFACTORY_USER"))
-			setProperty("password", System.getenv("ARTIFACTORY_PASSWORD"))
-			setProperty("maven", true)
-		})
-		defaults(delegateClosureOf<GroovyObject> {
-			invokeMethod("publications", "mavenJava")
-		})
-	})
-	resolve(delegateClosureOf<ResolverConfig> {
-		setProperty("repoKey", if (isReleaseBuild()) "releases" else "snapshots")
-	})
 }
 
 fun isReleaseBuild() = System.getenv("IS_RELEASE_BUILD")?.toBoolean() == true
