@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.10.2
 
-- Going forwards, this library will only be available at `https://maven.pkg.github.com/tmpasipanodya/spek-expekt`
-  instead of `https://tmpasipanodya.jfrog.io/artifactory/releases`.
+- Going forwards, this library will only be Github Packages instead of 
+  `https://tmpasipanodya.jfrog.io/artifactory/releases`.
 
 ## 0.10.1
 
