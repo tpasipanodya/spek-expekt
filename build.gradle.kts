@@ -1,15 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "1.8.22"
-	id("org.jetbrains.dokka") version "1.8.10"
+	kotlin("jvm") version "1.9.0"
+	id("org.jetbrains.dokka") version "1.8.20"
 	id("maven-publish")
 	idea
 }
 
 group = "io.taff"
 version = "0.10.1${ if (isReleaseBuild()) "" else "-SNAPSHOT" }"
-java.sourceCompatibility = JavaVersion.VERSION_19
+java.sourceCompatibility = JavaVersion.VERSION_20
 
 repositories {
 	mavenCentral()
@@ -39,7 +39,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "19"
+		jvmTarget = "20"
 	}
 }
 
