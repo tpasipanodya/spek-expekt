@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Going forwards, this library will only be Github Packages instead of 
   `https://tmpasipanodya.jfrog.io/artifactory/releases`.
+- `jvm` version `1.9.0`
+- `jdk` version `20`
 
 ## 0.10.1
 
