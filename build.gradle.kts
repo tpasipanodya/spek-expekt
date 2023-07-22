@@ -6,7 +6,6 @@ import groovy.lang.GroovyObject
 plugins {
 	kotlin("jvm") version "1.8.22"
 	id("org.jetbrains.dokka") version "1.8.10"
-	id("com.jfrog.artifactory") version "4.32.0"
 	id("maven-publish")
 	idea
 }
@@ -111,25 +110,6 @@ publishing {
 			}
 		}
 	}
-}
-
-artifactory {
-	setContextUrl("https://tmpasipanodya.jfrog.io/artifactory/")
-
-	publish(delegateClosureOf<PublisherConfig> {
-		repository(delegateClosureOf<GroovyObject> {
-			setProperty("repoKey", if (isReleaseBuild()) "releases" else "snapshots")
-			setProperty("username", System.getenv("ARTIFACTORY_USER"))
-			setProperty("password", System.getenv("ARTIFACTORY_PASSWORD"))
-			setProperty("maven", true)
-		})
-		defaults(delegateClosureOf<GroovyObject> {
-			invokeMethod("publications", "mavenJava")
-		})
-	})
-	resolve(delegateClosureOf<ResolverConfig> {
-		setProperty("repoKey", if (isReleaseBuild()) "releases" else "snapshots")
-	})
 }
 
 fun isReleaseBuild() = System.getenv("IS_RELEASE_BUILD")?.toBoolean() == true
