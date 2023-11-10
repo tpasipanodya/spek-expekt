@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	kotlin("jvm") version "1.9.10"
-	id("org.jetbrains.dokka") version "1.8.20"
+	id("org.jetbrains.dokka") version "1.9.10"
 	id("maven-publish")
 	idea
 }
@@ -29,9 +29,9 @@ dependencies {
 	api("com.natpryce:hamkrest:1.8.0.1")
 	api("com.google.guava:guava:32.1.1-jre")
 	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
-	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2")
+	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3")
 	api("org.junit.jupiter:junit-jupiter")
-	implementation(enforcedPlatform("org.junit:junit-bom:5.9.3"))
+	implementation(enforcedPlatform("org.junit:junit-bom:5.10.0"))
 	api("org.spekframework.spek2:spek-dsl-jvm:2.0.19")
 	api("org.spekframework.spek2:spek-runner-junit5:2.0.19")
 }
