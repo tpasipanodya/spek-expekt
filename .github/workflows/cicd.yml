@@ -20,7 +20,7 @@ jobs:
           java-version: 20
           distribution: zulu
       - name: Build & Deploy
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2.4.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IS_RELEASE_BUILD: true
