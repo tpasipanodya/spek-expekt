@@ -31,7 +31,7 @@ dependencies {
 	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
 	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0")
 	api("org.junit.jupiter:junit-jupiter")
-	implementation(enforcedPlatform("org.junit:junit-bom:5.10.1"))
+	implementation(enforcedPlatform("org.junit:junit-bom:5.10.2"))
 	api("org.spekframework.spek2:spek-dsl-jvm:2.0.19")
 	api("org.spekframework.spek2:spek-runner-junit5:2.0.19")
 }
