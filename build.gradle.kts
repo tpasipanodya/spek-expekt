@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "1.9.21"
+	kotlin("jvm") version "1.9.23"
 	id("org.jetbrains.dokka") version "1.9.10"
 	id("maven-publish")
 	idea
@@ -27,11 +27,11 @@ dependencies {
 	runtimeOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	api("io.github.microutils:kotlin-logging-jvm:3.0.5")
 	api("com.natpryce:hamkrest:1.8.0.1")
-	api("com.google.guava:guava:32.1.3-jre")
+	api("com.google.guava:guava:33.1.0-jre")
 	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.0")
 	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.0")
 	api("org.junit.jupiter:junit-jupiter")
-	implementation(enforcedPlatform("org.junit:junit-bom:5.10.1"))
+	implementation(enforcedPlatform("org.junit:junit-bom:5.10.2"))
 	api("org.spekframework.spek2:spek-dsl-jvm:2.0.19")
 	api("org.spekframework.spek2:spek-runner-junit5:2.0.19")
 }
