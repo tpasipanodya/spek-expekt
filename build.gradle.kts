@@ -28,7 +28,7 @@ dependencies {
 	api("io.github.microutils:kotlin-logging-jvm:3.0.5")
 	api("com.natpryce:hamkrest:1.8.0.1")
 	api("com.google.guava:guava:33.1.0-jre")
-	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.0")
+	api("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.1")
 	api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0")
 	api("org.junit.jupiter:junit-jupiter")
 	implementation(enforcedPlatform("org.junit:junit-bom:5.10.2"))
